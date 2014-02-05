@@ -23,6 +23,10 @@ for varIter = 1 : varMax
     if  converge (lik_old,lik_new,thres) 
         break;
     end
+    
+    if(lik_new < lik_old)
+        break;
+    end
     lik_old= lik_new;
     lik = [lik,lik_new];
     fprintf('----Iter = %d , variational likelihood: %d \n',varIter,lik_new);
