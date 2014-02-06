@@ -1,4 +1,4 @@
-function [ phiL_new, phiR_new] = update_phi(Y,  hyper_para, var_para, nC)
+function [ phiL_new, phiR_new] = update_phi(Y, hyper_para,  var_para)
 %UPDATE_PHI Summary of this function goes here: variational EM update for gama
 %   Detailed explanation goes here: Refer to Airoldi-p2009
 
@@ -10,7 +10,7 @@ B = hyper_para.B;
 phiL = var_para.phiL;
 phiR = var_para.phiR;
 gama = var_para.gama;
-
+nC = hyper_para.nC;
 [M, N] = size(gama);
 phiL_new = zeros(N,N,M);
 phiR_new = zeros(N,N,M);

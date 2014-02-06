@@ -1,14 +1,16 @@
-function [Pi,Gp,Rp] = samplingGLAD(Xp,Y,B,Theta,Beta,alpha,nC,nM)
+function [Gp,Rp,Pi] = sampling(Xp,Y,B,Theta,Beta,alpha,nC,nM)
 %SAMPLING Summary of this function goes here
 %   Detailed explanation goes here
-import lib.*;    
+import GLAD_Sample.*;
+import lib.*   
     %precalculate combination number
+
     cNum = zeros(nC+1,1);
     for i =1:nC+1
         cNum(i) = log(nchoosek(nC,i-1));
     end
     
-    itN = 100;
+    itN = 30;
     
     nNum = size(Xp,1);
     gNum = size(B,1);
@@ -40,7 +42,11 @@ import lib.*;
             for ri = 1:rNum
                 tProb(ri) = Theta(gn,ri)*(mnpdf(Xp(n,:),Beta(ri,:)));
             end
-            tProb = tProb/sum(tProb);
+            if (sum(tProb)==0)
+                tProb = 1/rNum * ones(1,rNum);
+            else
+                tProb = tProb/sum(tProb);
+            end
             Rp(n,:) = mnrnd(1,tProb);
             if(isnan(Rp(n,1)))
                 Rp(n,:) = mnrnd(1,ones(1,rNum)/rNum);
@@ -67,7 +73,7 @@ import lib.*;
                     tProb(gi) = tProb(gi) + cNum(Y(n,n2)+1) + Y(n,n2)*log(B(gi,gn))+(nC-Y(n,n2))*log(1-B(gi,gn));
                 end
             end
-            tProb = exp(tProb - getLogSum(tProb));
+            tProb = exp(tProb - GLAD_Sample.getLogSum(tProb));
             Gp(n,:) = mnrnd(1,tProb/sum(tProb));
              if(isnan(Gp(n,1)))
                 Gp(n,:) = mnrnd(1,ones(1,gNum)/gNum);

@@ -1,4 +1,4 @@
-function [B] =  emp_Bayes (Y, var_para, fixed_para)
+function [B] =  emp_Bayes (Y, hyper_para, var_para)
 %EMP_BAYES Summary of this function goes here: Emprical Bayesian to
 % estimate hyper-parameters
 %   Detailed explanation goes here
@@ -17,12 +17,12 @@ B = nan(M,M);
 
 
 
-    for g =1:M
-            for h = 1:M
-                B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)'))/sum(sum(phiL(:,:,g).* phiR(:,:,h)'));
-           end
-    end
-    B = B / fixed_para.nC;
+for g =1:M
+        for h = 1:M
+            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)'))/sum(sum(phiL(:,:,g).* phiR(:,:,h)'));
+       end
+end
+B = B / hyper_para.nC;
 % ---------End update B
 
 

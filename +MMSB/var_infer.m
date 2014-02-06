@@ -1,4 +1,4 @@
-function  var_para = var_infer ( Y, hyper_para,var_para,fixed_para,  varMax,thres)
+function  var_para = var_infer ( Y, hyper_para,var_para,varMax,thres)
 %VAR_INFER Summary of this function goes here: variational inference for BLAD model
 %   Detailed explanation goes here:
 % Input: refer to blad.m \\
@@ -11,6 +11,8 @@ function  var_para = var_infer ( Y, hyper_para,var_para,fixed_para,  varMax,thre
 % Blockwise Membership  \\
 
 % initial 
+
+global verbose;
 import MMSB.*;
 import lib.*;
 if(nargin < 5)
@@ -31,22 +33,24 @@ end
 %---
 
 lik = [];
-lik_old = var_lik (Y, hyper_para,var_para, fixed_para);
+lik_old = var_lik (Y, hyper_para,var_para);
 
 for varIter = 1 : varMax
-
-    [var_para.phiL, var_para.phiR]  = update_phi(Y,hyper_para,var_para, fixed_para.nC);
+    if verbose
+        fprintf('----Iter = %d , variational likelihood: %d \n',varIter,lik_old);
+    end
+    [var_para.phiL, var_para.phiR]  = update_phi(Y,hyper_para,var_para);
     [var_para.gama] = update_gama(hyper_para,var_para);
 
 
 
-    lik_new = var_lik (Y, hyper_para, var_para ,fixed_para); 
+    lik_new = var_lik (Y, hyper_para, var_para); 
     if  converge (lik_old,lik_new,thres) 
         break;
     end
     lik_old= lik_new;
     lik = [lik,lik_new];
-    fprintf('----Iter = %d , variational likelihood: %d \n',varIter,lik_new);
+
 end
 
 

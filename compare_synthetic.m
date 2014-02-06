@@ -50,12 +50,12 @@ import MMSB.*;
 fprintf('*******Done with MMSB******* \n');
 
 %% Graph- spectum
-% 
-% import graphcut.*
-% [G_idx_graph,Pi,cost]= grPartition(data.Y,M);
-% G_idx_graph = G_idx_graph';
-% 
-% fprintf('*******Done with Graph******* \n');
+
+import graphcut.*
+[G_idx_graph,Pi,cost]= grPartition(data.Y,M);
+G_idx_graph = G_idx_graph';
+
+fprintf('*******Done with Graph******* \n');
 
 %% Connected Components
 [S, G_idx_conn] = graphconncomp(sparse(data.Y));

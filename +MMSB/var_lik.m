@@ -1,4 +1,4 @@
-function like  = var_lik(Y,hyper_para,var_para, fixed_para)
+function like  = var_lik(Y , hyper_para, var_para)
 %VAR_LIK Summary of this function goes here: Variational log Likelihood 
 %   Detailed explanation goes here: log L(X, Y, pi_{1:N},Z_left, Z_right,G,R)
 % Using variational lower bound to approximate
@@ -6,6 +6,7 @@ import MMSB.*;
 import lib.*;
 alpha  = hyper_para.alpha;
 B = hyper_para.B;
+nC = hyper_para.nC;
 
 phiL = var_para.phiL;
 phiR = var_para.phiR;
@@ -24,7 +25,7 @@ gama = var_para.gama;
 phif = nan (M,M);
 for g = 1:M
     for h =1:M
-         f = Y* log(B(g,h)) +(fixed_para.nC-Y) *log(1-B(g,h));
+         f = Y* log(B(g,h)) +(nC-Y) *log(1-B(g,h));
 %         f = log (Y*B(g,h) + (1-Y) * (1-B(g,h)));
          phif(g,h) = sum( sum(phiL(:,:,g).* phiR(:,:,h).* f));
     end

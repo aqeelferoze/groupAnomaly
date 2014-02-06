@@ -3,34 +3,83 @@ addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
 
+for M =  [5]
 load ('syn10.mat');
-
+K = 2;
+M = 10;
 
 %% 
-import GLAD2.*
-var_para = GLAD2.train(data,hyper_para);
-%%
-[~, G_idx] = max(var_para.lambda);
-[~, R_idx] = max(var_para.mu);
-M = 10; K = 2; N = 1000;
-theta_emp = zeros(K,M);
-for n = 1:N
-    thetaG_idx(n) 
-    
-    
+import GLAD2.*; 
+var_para_glad = GLAD2.train(data,hyper_para);
+[~,G_idx_glad]= max(var_para_glad.lambda);
+[~,R_idx_glad]= max(var_para_glad.mu);
+[ scores_glad ] = lib.anomaly_score(G_idx_glad,R_idx_glad, M,K);
+
+%% MMSB
+import MMSB.*; 
+
+[hyper_para_mmsb,var_para_mmsb] = MMSB.mmsb(data.Y,hyper_para);
+[~, G_idx_mmsb] = max(var_para_mmsb.gama);
+
+%% Graph
+import graphcut.* ;
+[G_idx_graph,Pi,cost]= grPartition(data.Y,M);
+G_idx_graph = G_idx_graph';
+
+fprintf('*******Done with Graph******* \n');
+
+%% MMSB-LDA 
+import LDA.*;
+options = struct('n_try', 3, 'para', false, 'verbose', true, ...
+    'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
+[lda Like_lda]= LDA.Train(data.X, G_idx_mmsb', K, options);
+%[lda Like_lda]= LDA.Train(data.X, data.G', K, options);
+[~,R_idx_lda]= max(lda.phi,[],2);
+R_idx_lda = R_idx_lda';
+
+% [score_lda]= lda.score_var(G_idx_mmsb');
+[ scores_mmsb_lda ] = lib.anomaly_score(G_idx_mmsb,R_idx_lda, M,K);
+fprintf('*******Done with MMSB-LDA******* \n');
+
+%% MMSB-MGM 
+import MGM.*;
+options = struct('n_try', 3, 'para', false, 'verbose', true, ...
+    'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
+
+[mgm Like_mgm]= MGM.Train1(data.X, G_idx_mmsb', T, K, options);
+[~,R_idx_mgm]= max(mgm.phi,[],2);
+R_idx_mgm = R_idx_mgm';
+% [score_mgm] = mgm.ScoreVar(data.X, G_idx_mmsb');
+
+[ scores_mmsb_mgm] = lib.anomaly_score(G_idx_mmsb,R_idx_mgm, M,K);
+
+fprintf('*******Done with MMSB-MGM******* \n');
+
+%% Graph-LDA
+import LDA.*;
+[lda_g Like_lda_g]= LDA.Train(data.X, G_idx_graph', K, options);
+[~,R_idx_ldagraph]= max(lda_g.phi,[],2);
+R_idx_ldagraph = R_idx_ldagraph';
+
+%[score_ldagraph]= lda.score_var(G_idx_graph);
+
+[ scores_graph_lda] = lib.anomaly_score(G_idx_graph,R_idx_lda, M,K);
+
+fprintf('*******Done with Graph-LDA******* \n');
+%% Graph-MGM
+import MGM.*;
+options = struct('n_try', 3, 'para', false, 'verbose', true, ...
+    'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
+
+[mgm_g Like_mgm_g]= MGM.Train1(data.X, G_idx_graph', T, K, options);
+[~,R_idx_mgmgraph]= max(mgm_g.phi,[],2);
+R_idx_mgmgraph = R_idx_mgmgraph';
+%[score_mgmgraph] = mgm_g.ScoreVar(data.X, G_idx_graph');
+[ scores_graph_mgm] = lib.anomaly_score(G_idx_graph,R_idx_mgm, M,K);
 
 
-scores = GLAD2.score_var(data.X, data.Y , hyper_para, var_para);
- 
+fprintf('*******Done with Graph-MGM******* \n');
 
-%%
-import GLAD_Sample.*;
-
-nC = 100;
-nM = 100;
-[Pi,Gp,Rp] = GLAD_Sample.samplingGLAD(data.X,data.Y,hyper_para.B,hyper_para.theta',hyper_para.beta,hyper_para.alpha,nC,nM);
-
-
-
+save('./
 
 

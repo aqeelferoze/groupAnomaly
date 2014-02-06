@@ -11,7 +11,7 @@ B = 0.9 * eye(M)+1e-2*ones(M);
 beta = [0.9,0.1;0.2,0.8];
 good = [0.9,0.1]'; % K = 2
 bad = [0.1,0.9]';
-nC = 100; nM = 100;
+nC = 1; nM = 100;
 K = length(good);
 theta = zeros(K,M);
 theta(:,good_idx) = repmat(good,[1,length(good_idx)]);

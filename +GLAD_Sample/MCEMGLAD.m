@@ -1,7 +1,9 @@
-function [B,Theta,Beta,Gp,Rp,Pi] = MCEMGLAD(Xp,Y,iB,iTheta,iBeta,nC,nM,itN)
+function [Rp,Gp,Pi, Theta, B,Beta] = MCEMGLAD(Xp,Y,iTheta,iB,iBeta,alpha, nC,nM)
 %MCEM Summary of this function goes here
 %   Detailed explanation goes here
-import GLAD_Sample.*;    
+import GLAD_Sample.*;
+import lib.*
+    itN = 3;
     nNum = size(Xp,1);
     gNum = size(iB,1);
     rNum = size(iTheta,2);
@@ -10,14 +12,13 @@ import GLAD_Sample.*;
     B = iB;
     Theta = iTheta;
     Beta = iBeta;
-    
-    alpha = 0.1;
+
     
 
     
     for iti = 1:itN
         
-        [Pi,Gp,Rp] = samplingGLAD(Xp,Y,B,Theta,Beta,alpha,nC,nM);
+        [Gp,Rp,Pi] = samplingGLAD(Xp,Y,B,Theta,Beta,alpha,nC,nM);
         
         %updtae parameter Theta
         Theta = Gp'*Rp;

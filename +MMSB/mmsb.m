@@ -1,11 +1,14 @@
-function [ hyper_para, var_para] = mmsb(Y,fixed_para, hyper_para)
+function [ hyper_para, var_para] = mmsb(Y, hyper_para)
 %MMSB Summary of this function goes here
 %   Detailed explanation goes here
+
+global verbose;
+
 import MMSB.*
 import lib.*
 
 N = size(Y,1);
-M = fixed_para.M;
+M = size(hyper_para.B,1);
 
 if(nargin ==2)
 % hyper- parameter EM
@@ -16,12 +19,12 @@ hyper_para.B = betarnd (1,1, [M,M]);
 end
 
 %-------
-hyperMax = 60;
-varMax = 50;
+hyperMax = 10;
+varMax = 30;
 thres = 1e-5;
 
 var_para = new_var_para0(hyper_para, N,M);
-lik_old  = var_lik (Y, hyper_para,var_para , fixed_para);
+lik_old  = var_lik (Y, hyper_para,var_para);
 %--- Get the initial values
 
 lik = [];
@@ -29,16 +32,19 @@ for hyperIter = 1: hyperMax
 
      % Variationa E step
      % --- using variational value of old hyperIter
-     var_para = var_infer (Y,  hyper_para, var_para,fixed_para, varMax,thres);
-     lik_new = var_lik (Y, hyper_para,var_para , fixed_para);
+     if verbose
+        fprintf('--Iter = %d, likelihood = %d \n',hyperIter,lik_old)
+     end
+     var_para = var_infer (Y, hyper_para, var_para,varMax,thres);
+     lik_new = var_lik (Y, hyper_para, var_para );
      if converge(lik_old, lik_new, thres)
          break;
      end
      lik_old = lik_new;
      lik = [lik,lik_new];
-     fprintf('--Iter = %d, likelihood = %d \n',hyperIter,lik_old)
+
      % M step
-     [hyper_para.B] =  emp_Bayes (Y, var_para, fixed_para);
+     [hyper_para.B] =  emp_Bayes (Y, hyper_para, var_para);
 
 end
 lik = [lik,lik_new];
