@@ -6,7 +6,5 @@ var_para.phiL  = ones(N,N,M)/M;
 var_para.phiR  = ones (N,N,M) /M;
 var_para.gama = update_gama (hyper_para, var_para);
 
-
-
 end
 

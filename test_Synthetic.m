@@ -45,7 +45,7 @@ for M =  [5,10,20,50,100]
     import MGM.*;
     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-    T = 2;
+    T = 1;
     [mgm Like_mgm]= MGM.Train1(data.X, G_idx_mmsb', T, K, options);
     [~,R_idx_mmsb_mgm]= max(mgm.phi,[],2);
     R_idx_mmsb_mgm = R_idx_mmsb_mgm';
@@ -73,7 +73,7 @@ for M =  [5,10,20,50,100]
     import MGM.*;
     options = struct('n_try', 3, 'para', false, 'verbose', true, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-    T = 2;
+    T = 1;
     [mgm_g Like_mgm_g]= MGM.Train1(data.X, G_idx_graph', T, K, options);
     [~,R_idx_graph_mgm]= max(mgm_g.phi,[],2);
     R_idx_graph_mgm = R_idx_graph_mgm';
@@ -86,5 +86,7 @@ for M =  [5,10,20,50,100]
     save(strcat('./Result/synScore',int2str(M),'.mat'),'scores_glad','scores_mmsb_lda','scores_mmsb_mgm',...
         'scores_graph_lda','scores_graph_mgm');
 end
+
+exit;
 
 
