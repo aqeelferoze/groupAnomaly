@@ -16,7 +16,7 @@ for i = 1:length(Ms)
         good_idx = indices(Pr+1:end); %  anomaly
         [data, hyper_para]  = GLAD2.genData( N,M , good_idx, bad_idx);
         save(fname,'data','hyper_para','bad_idx','good_idx');
-        fprintf('M = %d, Bad = %d\n', M, 1-Pr);
+        fprintf('M = %d, Bad = %d\n', M,Pr);
     end
 end
 

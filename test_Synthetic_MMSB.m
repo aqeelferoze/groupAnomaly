@@ -1,11 +1,11 @@
 clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
-verbose = 1;
+verbose = 0;
 
-% for M =  [5,10,20,50,100]
-for M = [5,10,20,50]
-    fname = strcat('./Data/syn',int2str(M),'.mat');
+for M = [5,10,20,50, 100]
+    for n = 1:5
+    fname = strcat('./Data/syn',int2str(M),'_',int2str(n),'.mat');
     load (fname);
     K = 2;
 
@@ -49,7 +49,8 @@ for M = [5,10,20,50]
     fprintf('*******Done with MMSB-MGM******* \n');
 %%
 
-    save(strcat('./Result/synScore',int2str(M),'_2.mat'),'scores_mmsb_lda','scores_mmsb_mgm');
+    save(strcat('./Result/mmsbScore',int2str(M),'_',int2str(n),'.mat'),'G_idx_mmsb','R_idx_mmsb_lda','R_idx_mmsb_mgm','scores_mmsb_lda','scores_mmsb_mgm');
+    end
 end
 
 exit;
