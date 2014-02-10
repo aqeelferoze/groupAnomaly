@@ -12,7 +12,7 @@ prec_graph_mgm = [];
 prec_mmsb_mgm = [];
 prec_mmsb_lda = [];
 
-for M =  [5,10,20,50,100]
+for M =  [5,10,20,50]
     Rstname = strcat('./Result/synScore',int2str(M),'.mat');
     load (Rstname);
     Datname = strcat('./Data/syn',int2str(M),'.mat');

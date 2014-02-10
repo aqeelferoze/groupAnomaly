@@ -16,7 +16,7 @@ global verbose;
 import MMSB.*;
 import lib.*;
 if(nargin < 5)
-    varMax = 100;
+    varMax = 50;
     thres = 1e-5;
 end
 

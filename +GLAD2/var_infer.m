@@ -6,7 +6,7 @@ function [ var_para ] = var_infer( X, Y,  hyper_para, var_para,varMax,thres )
 import GLAD2.*;
 import lib.*;
 if(nargin < 5)
-    varMax = 20;
+    varMax = 50;
     thres = 1e-5;
 end
 
