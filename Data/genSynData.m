@@ -3,7 +3,8 @@ clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 import GLAD2.*;
 N = 500;
-Ms = [5,10,20,50,100]; pr = 0.2;
+Ms = 1:10;
+pr = 0.2;
 
 
 for i = 1:length(Ms)
