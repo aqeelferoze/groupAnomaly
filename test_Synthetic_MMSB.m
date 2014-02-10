@@ -14,6 +14,9 @@ for M = [5,10,20,50, 100]
 
     [hyper_para_mmsb,var_para_mmsb] = MMSB.mmsb(data.Y,hyper_para);
     [~, G_idx_mmsb] = max(var_para_mmsb.gama);
+    G_idx_mmsb  = G_idx_mmsb';
+    G_idx_mmsb = lib.align_index (G_idx_mmsb,data.G);
+
     
     fprintf('*******Done with MMSB ******* \n');
 
@@ -22,7 +25,7 @@ for M = [5,10,20,50, 100]
     import LDA.*;
     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-    [lda Like_lda]= LDA.Train(data.X, G_idx_mmsb', K, options);
+    [lda Like_lda]= LDA.Train(data.X, G_idx_mmsb, K, options);
     [~,R_idx_mmsb_lda]= max(lda.phi,[],2);
     R_idx_mmsb_lda = R_idx_mmsb_lda';
     R_idx_mmsb_lda = lib.align_index (R_idx_mmsb_lda,data.R);
@@ -36,7 +39,10 @@ for M = [5,10,20,50, 100]
     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
     T = 1;
-    [mgm Like_mgm]= MGM.Train1(data.X, G_idx_mmsb', T, K, options);
+    if(numel(unique(G_idx_mmsb))==1)
+        G_idx_mmsb = crossvalind('Kfold', length(G_idx_mmsb), M);
+    end
+    [mgm Like_mgm]= MGM.Train1(data.X, G_idx_mmsb, T, K, options);
     [~,R_idx_mmsb_mgm]= max(mgm.phi,[],2);
     R_idx_mmsb_mgm = R_idx_mmsb_mgm';
     R_idx_mmsb_mgm = lib.align_index (R_idx_mmsb_mgm,data.R);
