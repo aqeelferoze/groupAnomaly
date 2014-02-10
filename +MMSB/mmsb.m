@@ -15,13 +15,13 @@ if(nargin ==2)
 %----
 hyper_para.alpha = 0.1*ones(1,M);
 %---generate from Beta function---
-hyper_para.B = betarnd (1,1, [M,M]);
+% hyper_para.B = betarnd (1,1, [M,M]);
 end
 
 %-------
-hyperMax = 10;
+hyperMax = 5;
 varMax = 30;
-thres = 1e-5;
+thres = 1e-4;
 
 var_para = new_var_para0(hyper_para, N,M);
 lik_old  = var_lik (Y, hyper_para,var_para);

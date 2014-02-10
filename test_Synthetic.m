@@ -91,7 +91,7 @@ for M = [5,10]
 
 
     fprintf('*******Done with Graph-MGM******* \n');
-
+%%
     save(strcat('./Result/synScore',int2str(M),'_2.mat'),'scores_glad','scores_mmsb_lda','scores_mmsb_mgm',...
         'scores_graph_lda','scores_graph_mgm');
 end
