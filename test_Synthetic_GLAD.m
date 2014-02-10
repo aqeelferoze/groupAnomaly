@@ -7,7 +7,7 @@ for M =  [5,10,20,50,100]
     for n = 1:5
 
     fname = strcat('./Data/syn',int2str(M),'_',int2str(n),'.mat');
-    load (fname);
+    load(fname);
     K = 2;   
     %% 
     import GLAD2.*; 

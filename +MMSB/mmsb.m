@@ -15,7 +15,7 @@ if(nargin ==2)
 %----
 hyper_para.alpha = 0.1*ones(1,M);
 %---generate from Beta function---
-% hyper_para.B = betarnd (1,1, [M,M]);
+hyper_para.B = betarnd (1,1, [M,M]);
 end
 
 %-------

@@ -1,7 +1,7 @@
 clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
-verbose = 0;
+verbose = 1;
 
 for M = [5,10,20,50, 100]
     for n = 1:5
@@ -14,9 +14,8 @@ for M = [5,10,20,50, 100]
 
     [hyper_para_mmsb,var_para_mmsb] = MMSB.mmsb(data.Y,hyper_para);
     [~, G_idx_mmsb] = max(var_para_mmsb.gama);
-    G_idx_mmsb = lib.align_index (G_idx_mmsb,data.G);
     
-     fprintf('*******Done with MMSB ******* \n');
+    fprintf('*******Done with MMSB ******* \n');
 
 
     %% MMSB-LDA 
