@@ -4,7 +4,7 @@ global verbose;
 verbose = 1;
 
 
-for M = 2:10
+for M = 6:10
 for n = 6:10
     fname = strcat('./Data/syn',int2str(M),'_',int2str(n),'.mat');
     load (fname);
@@ -43,6 +43,7 @@ for n = 6:10
     if(numel(unique(G_idx_mmsb))==1)
         G_idx_mmsb = crossvalind('Kfold', length(G_idx_mmsb), M);
     end
+    G_idx_mmsb = reshape(G_idx_mmsb,[length(G_idx_mmsb,1]);
     [mgm Like_mgm]= MGM.Train1(data.X, G_idx_mmsb, T, K, options);
     [~,R_idx_mmsb_mgm]= max(mgm.phi,[],2);
     R_idx_mmsb_mgm = R_idx_mmsb_mgm';
