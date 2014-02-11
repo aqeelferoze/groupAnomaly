@@ -11,7 +11,6 @@ for M = 1:10
     %% Graph
     import graphcut.* ;
     [G_idx_graph,Pi,cost]= grPartition(data.Y,M);
-    G_idx_graph = G_idx_graph';
     G_idx_graph = lib.align_index (G_idx_graph,data.G);
 
     fprintf('*******Done with Graph******* \n');
@@ -20,7 +19,7 @@ for M = 1:10
     import lib.*;
     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-    [lda_g Like_lda_g]= LDA.Train(data.X, G_idx_graph', K, options);
+    [lda_g Like_lda_g]= LDA.Train(data.X, G_idx_graph, K, options);
     [~,R_idx_graph_lda]= max(lda_g.phi,[],2);
     R_idx_graph_lda = R_idx_graph_lda';
     % do role alignment
@@ -37,7 +36,11 @@ for M = 1:10
     options = struct('n_try', 3, 'para', false, 'verbose', true, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
     T = 1;
-    [mgm_g Like_mgm_g]= MGM.Train1(data.X, G_idx_graph', T, K, options);
+    if(numel(unique(G_idx_graph))==1)
+	G_idx_graph = crossvalind('Kfold',length(G_idx_graph),M);
+    end
+    G_idx_graph = reshape(G_idx_graph,[length(G_idx_graph),1]);
+    [mgm_g Like_mgm_g]= MGM.Train1(data.X, G_idx_graph, T, K, options);
     [~,R_idx_graph_mgm]= max(mgm_g.phi,[],2);
     R_idx_graph_mgm = R_idx_graph_mgm';
     %[score_mgmgraph] = mgm_g.ScoreVar(data.X, G_idx_graph');
