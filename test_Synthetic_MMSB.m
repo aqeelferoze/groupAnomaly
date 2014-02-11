@@ -3,8 +3,9 @@ addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
 
-for M = [5,10,20,50, 100]
-    for n = 6:10
+
+for M = 2:10
+for n = 6:10
     fname = strcat('./Data/syn',int2str(M),'_',int2str(n),'.mat');
     load (fname);
     K = 2;
