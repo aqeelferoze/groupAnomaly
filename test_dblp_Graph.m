@@ -50,5 +50,5 @@ G_idx_graph = reshape(G_idx_graph,[length(G_idx_graph),1]);
 R_idx_graph_mgm = R_idx_graph_mgm';
 
 run_time_mgm = toc;
-save(strcat('./Result/dblp_Graph.mat'),'R_idx_graph_lda','R_idx_graph_mgm','G_idx_graph','lda_g','mgm_g');
+save(strcat('./Result/dblp_Graph.mat'),'R_idx_graph_lda','R_idx_graph_mgm','G_idx_graph','lda_g','mgm_g','run_time_lda','run_time_mgm');
 exit;
