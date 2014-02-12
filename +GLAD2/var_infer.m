@@ -16,7 +16,7 @@ lik_old = var_lik (X,Y, hyper_para,var_para);
 
 for varIter = 1 : varMax
     if verbose
-        fprintf('----Iter = %d , variational likelihood: %d \n',varIter,lik_new);
+        fprintf('----Iter = %d , variational likelihood: %d \n',varIter,lik_old);
     end 
     [var_para.lambda] = update_lambda( Y, hyper_para, var_para);
     [var_para.gama] = update_gama(hyper_para,var_para);

@@ -6,15 +6,14 @@ global verbose;
 verbose = 1;
 
 import +lib.*;
+import +GLAD2.*
 
 
-dblp = load('dblp_P.mat');
-dblp = dblp.data;
+data = load('dblp_P2.mat');
+
 M = 4;
 K = 4;
-data.X = dblp.X;
-V = size(data.X,2);
-data.Y = dblp.Y_bin;
+
 
 hyper_para.alpha = ones(1,M) * 0.01;
 hyper_para.B = eye(M,M)*0.8 + 0.1;
