@@ -42,7 +42,6 @@ logG = sum(diag( lambda'* (psi(gama)-repmat(psi(sum(gama)), [M,1]))));
 
 logR = sum(diag(mu'* logs(theta) * lambda)); 
 
-
 logX = sum(diag(X * logs(beta)' * mu));
 
 % logX = 0;

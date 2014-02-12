@@ -21,10 +21,6 @@ M= 20;
 K = 5;
 
 
-
-
-
-
 alpha = 0.3 ;
 
 Theta0 = mnormalize(rand(M,K),2);
