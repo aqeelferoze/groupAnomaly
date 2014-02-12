@@ -10,7 +10,7 @@ dblp = dblp.data;
 M = 4;
 K = 4;
 data.X = dblp.X;
-V = length(data.X,2);
+V = size(data.X,2);
 data.Y = dblp.Y_bin;
 
 hyper_para.alpha = ones(1,M) * 0.01;
@@ -23,3 +23,4 @@ tic;
 var_para_glad = GLAD2.train(data,hyper_para);
 run_time = toc;
 save(strcat('./Result/dblp_GLAD.mat'),'var_para_glad','hyper_para','run_time');
+exit;

@@ -20,7 +20,7 @@ mu = var_para.mu;
 
 % Parallel on Group
 
-parfor g = 1:M
+for g = 1:M
     for h =1:M
          f = Y* logs(B(g,h)) +(nC-Y) *logs(1-B(g,h));
          f(logical(eye(size(f)))) = 0;  % remove diagonal 
