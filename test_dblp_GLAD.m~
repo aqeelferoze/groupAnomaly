@@ -2,9 +2,6 @@ clear;
 clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 
-global verbose;
-verbose = 1;
-
 dblp = load('dblp_P.mat');
 dblp = dblp.data;
 M = 4;

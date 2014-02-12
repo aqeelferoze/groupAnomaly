@@ -19,7 +19,7 @@ nC = hyper_para.nC;
 rho = 0;
 % alpha = update_alpha(gama);
 
-for g =1:M
+parfor g =1:M
     for h = 1:M
         B(g,h) = sum(sum(Y.*(lambda(g,:)'*lambda(h,:))))/((1-rho)*sum(sum(lambda(g,:)'*lambda(h,:))));
    end

@@ -53,8 +53,5 @@ fprintf('Training Finished \n');
 % lik = [lik,lik_new];
 % plot(1:length(lik), lik);
 
-[~, G_idx] = max(var_para.lambda);
-[~, R_idx] = max(var_para. mu);
 
-scores = score_var(X, Y , hyper_para, var_para);
 
