@@ -1,4 +1,4 @@
-function [ var_para ] = train(data, hyper_para, hyperMaxPre, varMaxPre)
+function [ var_para , hyper_para] = train(data, hyper_para, hyperMaxPre, varMaxPre)
 % TRAIN Summary of this function goes here
 %   Detailed explanation goes here
 

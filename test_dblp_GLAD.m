@@ -22,7 +22,7 @@ hyper_para.theta = lib.mnormalize(rand(K,M),1);
 hyper_para.nC = 1;
 
 tic;
-var_para_glad = GLAD2.train(data,hyper_para);
+[var_para_glad , hyper_para_glad] = GLAD2.train(data,hyper_para);
 run_time = toc;
-save(strcat('./Result/dblp_GLAD.mat'),'var_para_glad','hyper_para','run_time');
+save(strcat('./Result/dblp_GLAD.mat'),'var_para_glad','hyper_para_glad','hyper_para','run_time');
 exit;

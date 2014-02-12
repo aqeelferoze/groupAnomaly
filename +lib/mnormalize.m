@@ -24,10 +24,9 @@ x = m./de;
 x = double(x);
 
 if(~isempty(find(de==0)))
-    warning('Normalize: Zero Sum');
+    warning('Normalize: Zero Sum to all equal.');
     idx = de==0;
-    x(idx) = 0;
-    
+    x(idx) = 1/dim(d);   
 end
 %x(~isfinite(x))=1/dim(d);
 
