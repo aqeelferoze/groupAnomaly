@@ -5,7 +5,7 @@ addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
 
-
+import lib.*;
 for M = 10: 2: 20
 K = 4;
 sz_group = 100;
@@ -28,7 +28,7 @@ V = N;
 
 [mgm Like_mgm]= MGM.Train1(X(:,1:V-1), G_idx, T, K, options);
 [~,R_idx_mgm]= max(mgm.phi,[],2);
-[ scores_mgm ] = anomaly_score_rd( G_idx, R_idx_mgm, M,K  );
+[ scores_mgm ] = lib.anomaly_score_rd( G_idx, R_idx_mgm, M,K  );
 
 
 %%
@@ -38,7 +38,7 @@ options = struct('n_try', 3, 'para', false, 'verbose', true, ...
         'epsilon', 1e-2, 'max_iter', 30, 'ridge', 1e-2);
 [lda_g Like_lda_g]= LDA.Train(X(:,1:V-1), G_idx, K, options);
 [~,R_idx_graph_lda]= max(lda_g.phi,[],2);
-[ scores_lda ] = anomaly_score_rd( G_idx, R_idx_lda, M,K  );
+[ scores_lda ] = lib.anomaly_score_rd( G_idx, R_idx_lda, M,K  );
 
 save(strcat('./Result/dblpMGM_',int2str(M),'.mat'),'scores_mgm','scores_lda');
 end
