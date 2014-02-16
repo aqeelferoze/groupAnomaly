@@ -7,7 +7,7 @@ verbose = 1;
 
 import lib.*;
 
-for M = 12:2:20
+for M = [50,80,100]
 K = 4;
 sz_group = 100;
 N = sz_group *M;
@@ -15,7 +15,7 @@ G_idx = [];
 for m = 1:M
     G_idx = [G_idx ; m*ones(sz_group,1)];
 end
-fname = strcat('./Data/data_text/dblpMGM_anomaly_',int2str(M),'.mat');
+fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
 load(fname);
 
 %% do something to remove constant column

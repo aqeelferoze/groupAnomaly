@@ -8,7 +8,7 @@ verbose = 1;
 import lib.*;
 
 
-for M = 10: 2: 20
+for M = [50,80,100]
 K = 4;
 sz_group = 100;
 N = sz_group *M;

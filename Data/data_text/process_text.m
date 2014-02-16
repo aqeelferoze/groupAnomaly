@@ -38,7 +38,7 @@ num_term = size(Mdt, 2);
 load('dblp_4area_abstract.mat');
 [num_doc, num_conf] = size(Mdc);
 
-for M = 12:2:20
+for M = [50,80,100]
 thres = 0.2;sz_group = 100; 
 Pr = ceil(M*thres);
 bad_idx = randperm(M,Pr);
@@ -80,11 +80,6 @@ end
 % X = mnrnd(10000,pr);
 % X = X+1;
 
-% const_idx = [689 816 884  931 943  1081 1212  1555  1572 ...
-% 1575  1576  1626  1657  1788  1799  1800  1863  1868  1942  1976];
-% 
-% X(:,const_idx) =[];
-
 
 %%
 
@@ -95,8 +90,8 @@ for m = 1:M
     Y(start_idx:end_idx,start_idx:end_idx) = 1;
 end
 
-save(strcat('./Data/data_text/dblpMGM_anomaly_',int2str(M),'.mat'),'X','Y','bad_idx');
-fprintf('Data generated \n');
+save(strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat'),'X','Y','bad_idx');
+fprintf('Data generated M = %d \n',M);
 
 end
 
