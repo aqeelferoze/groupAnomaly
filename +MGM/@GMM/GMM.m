@@ -201,6 +201,7 @@ classdef GMM
             if ~model.Converged
                 fprintf('** GMM EM failed to converge in %d iterations\n', max_iter);
             end
+            warning on stats:gmdistribution:ZeroVariance
             
             gmm = GMM(model.PComponents, model.mu', model.Sigma);
             lh = -model.NlogL;

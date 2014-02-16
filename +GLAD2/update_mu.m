@@ -11,9 +11,8 @@ beta = hyper_para.beta;
 lambda = var_para.lambda;
 nC = hyper_para.nC;
 
-[K,V] = size(beta);
 N=  size(lambda,2);
-pdf = zeros(N,K);
+% pdf = zeros(N,K);
 % for k = 1:K 
 %   pdf(:,k) = mvnpdf(X,beta(k,:),0.05*eye(V));% exp(Small Number) = 0
 % end
@@ -21,7 +20,6 @@ pdf = zeros(N,K);
 
 
 mu = exp(vpa( logs(theta) * lambda + logs(beta)*X'));
-
 % exp(Small Number) = 0
 mu = mnormalize(mu,1);
 

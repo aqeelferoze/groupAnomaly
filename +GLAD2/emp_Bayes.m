@@ -28,7 +28,7 @@ B  = B/nC;
 % ---------End update B
 
 theta = mnormalize(mu * lambda');
-beta = mnormalize(mu * X);
+beta = mnormalize( mu*X,2);
 
 end
 

@@ -1,0 +1,21 @@
+data mining based learning model algorithm database efficient queries time approach tree algorithms relational large systems management models query problem 
+
+data learning web based search information clustering classification approach model feature text algorithm efficient social results documents queries mining query 
+
+data web retrieval based information mining query classification text clustering search learning model algorithm time models approach paper results document 
+
+data query database based queries mining xml databases efficient systems system processing web time management approach algorithms performance information large 
+
+(four topics learned by GLAD from 1000 terms of top 100 authors)
+
+
+
+web data information based learning search retrieval clustering query text model classification approach mining algorithm models paper results queries document 
+
+data query database queries xml systems based system databases management processing web efficient performance information distributed approach object relational optimization 
+
+data databases object access database control oriented security based indexing systems privacy index query xml temporal system queries model management 
+
+data mining based efficient time query algorithm queries clustering databases algorithms large database streams processing patterns approach search tree spatial 
+
+（four topics learned by GLAD from all terms of top 100 authors)

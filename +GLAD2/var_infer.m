@@ -27,9 +27,9 @@ for varIter = 1 : varMax
         break;
     end
     
-    if(lik_new < lik_old)
-        break;
-    end
+%     if(lik_new < lik_old)
+%         break;
+%     end
     lik_old= lik_new;
     lik = [lik,lik_new];
     

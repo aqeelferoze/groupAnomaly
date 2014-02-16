@@ -6,7 +6,7 @@ verbose = 0;
 for M = 2:10
     for n = 6:10
 
-    fname = strcat('./Data/syn',int2str(M),'_',int2str(n),'.mat');
+    fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load(fname);
     K = 2;   
     %% 
