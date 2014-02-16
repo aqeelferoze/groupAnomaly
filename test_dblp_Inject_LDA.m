@@ -6,7 +6,7 @@ global verbose;
 verbose = 1;
 
 import lib.*;
-V = size(X,2);
+
 
 for M = 10: 2: 20
 K = 4;
@@ -19,6 +19,7 @@ end
 fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
 load(fname);
 
+V = size(X,2);
 %%
 import LDA.*
 
