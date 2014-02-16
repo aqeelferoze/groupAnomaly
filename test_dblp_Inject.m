@@ -16,6 +16,7 @@ for m = 1:M
 end
 fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
 load(fname);
+V = size(X,2);
 
 %%
 data.X = X;
