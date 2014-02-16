@@ -182,6 +182,7 @@ classdef GMM
             verbose = choose(verbose, 'iter', 'off');
             
             warning off stats:gmdistribution:FailedToConverge
+           
             if K == 1
                 model = gmdistribution.fit(X, 1);
             elseif strcmp(init, 'kmeans')
