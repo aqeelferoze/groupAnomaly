@@ -37,7 +37,7 @@ import LDA.*
 options = struct('n_try', 3, 'para', false, 'verbose', true, ...
         'epsilon', 1e-2, 'max_iter', 30, 'ridge', 1e-2);
 [lda_g Like_lda_g]= LDA.Train(X(:,1:V-1), G_idx, K, options);
-[~,R_idx_graph_lda]= max(lda_g.phi,[],2);
+[~,R_idx_lda]= max(lda_g.phi,[],2);
 [ scores_lda ] = lib.anomaly_score_rd( G_idx, R_idx_lda, M,K  );
 
 save(strcat('./Result/dblpMGM_',int2str(M),'.mat'),'scores_mgm','scores_lda');
