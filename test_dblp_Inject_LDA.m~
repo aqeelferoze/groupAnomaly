@@ -6,9 +6,9 @@ global verbose;
 verbose = 1;
 
 import lib.*;
-V = size(X,2);
 
-for M = 10: 2: 20
+% for M = 10: 2: 20
+for M = 20;
 K = 4;
 sz_group = 100;
 N = sz_group *M;
