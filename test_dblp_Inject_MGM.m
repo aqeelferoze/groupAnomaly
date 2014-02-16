@@ -7,7 +7,7 @@ verbose = 1;
 
 import lib.*;
 
-for M = 10: 2: 20
+for M = 12:2:20
 K = 4;
 sz_group = 100;
 N = sz_group *M;
@@ -15,16 +15,21 @@ G_idx = [];
 for m = 1:M
     G_idx = [G_idx ; m*ones(sz_group,1)];
 end
-fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
+fname = strcat('./Data/data_text/dblpMGM_anomaly_',int2str(M),'.mat');
 load(fname);
 
+%% do something to remove constant column
+V0 = size(X,2);
+const_idx = [];
+for v = 1:V0
+    if(numel(unique(X(:,v)))==1)
+        const_idx = [const_idx,v];
+    end
+end
+
+X(:,const_idx)=[];
+
 %%
-
-const_idx = [689 816 884  931 943  1081 1212  1555  1572 ...
-1575  1576  1626  1657  1788  1799  1800  1863  1868  1942  1976];
-
-X(:,const_idx) =[];
-
 V = size(X,2);
 
 import MGM.*;

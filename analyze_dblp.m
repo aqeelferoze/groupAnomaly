@@ -1,4 +1,5 @@
 %% topics sketch
+
 load('dblp_4area_abstract.mat');
 beta = hyper_para_glad.beta;
 [~,order] = sort(beta,2,'descend');
@@ -19,12 +20,22 @@ end
 import lib.*;
 import Cal.*;
 
-
-
-bad_idx = 10;
+Ms= [10:2:20];
 thres = 0.2;
-prec_glad = cal_anomaly_prec( bad_idx, scores_glad, thres );
+for i = 1:6
+    M = Ms(i);
+    Rstname = strcat('./Result/dblpGlad_',int2str(M),'.mat');
+    load(Rstname);
+    Datname =strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
+    load(Datname);
 
-prec_mgm = cal_anomaly_prec( bad_idx, scores_mgm, thres );
+  
+    prec_glad(i) = cal_anomaly_prec( bad_idx, scores_glad, thres );
+end
+
+plot(prec_glad);
+mean(prec_glad);
+
+% prec_mgm = cal_anomaly_prec( bad_idx, scores_mgm, thres );
 
 
