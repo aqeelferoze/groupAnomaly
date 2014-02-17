@@ -20,26 +20,27 @@ end
 import lib.*;
 import Cal.*;
 
-Ms= [50,100];
+Ms= [50,80,100];
 thres = 0.2;
-for i = 1:6
+prec_mgm = zeros(1,3);
+for i = 1:length(Ms)
     M = Ms(i);
-    Rstname = strcat('./Result/dblpGlad_',int2str(M),'.mat');
-    load(Rstname);
-    Datname =strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
-    load(Datname);
-    
-    
-    Rstname = strcat('./Result/dblpLDA_',int2str(M),'.mat');
-    load(Rstname);
-    prec_glad(i) = cal_anomaly_prec( bad_idx, scores_glad, thres );
-    prec_lda(i) = cal_anomaly_prec( bad_idx, scores_lda, thres);
-    
+%     Rstname = strcat('./Result/dblpGlad_',int2str(M),'.mat');
+%     load(Rstname);
+%     Datname =strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
+%     load(Datname);
+%     
+%     
+%     Rstname = strcat('./Result/dblpLDA_',int2str(M),'.mat');
+%     load(Rstname);
+%     prec_glad(i) = cal_anomaly_prec( bad_idx, scores_glad, thres );
+%     prec_lda(i) = cal_anomaly_prec( bad_idx, scores_lda, thres);
+%     
     
     
     Rstname = strcat('./Result/dblpMGM_',int2str(M),'.mat');
     load(Rstname);
-    Datname =strcat('./Data/data_text/dblpMGM_anomaly_',int2str(M),'.mat');
+    Datname =strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
     load(Datname);
     
     
@@ -49,8 +50,8 @@ for i = 1:6
     
 end
 hold all;
-plot(prec_glad);
-plot(prec_lda);
+% plot(prec_glad);
+% plot(prec_lda);
 plot(prec_mgm);
 
 mean(prec_glad)
