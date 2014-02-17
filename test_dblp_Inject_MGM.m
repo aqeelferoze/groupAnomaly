@@ -7,9 +7,9 @@ verbose = 1;
 
 import lib.*;
 
-for M = [80,100]
+for M = [50 100 200];
 K = 4;
-sz_group = 100;
+sz_group = 20;
 N = sz_group *M;
 G_idx = [];
 for m = 1:M
@@ -17,6 +17,10 @@ for m = 1:M
 end
 fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
 load(fname);
+
+%% Graph
+import graphcut.* ;
+[G_idx_graph,Pi,cost]= grPartition(Y,M);
 
 %% do something to remove constant column
 V0 = size(X,2);
@@ -36,13 +40,14 @@ if(N <V)
 end
 
 import MGM.*;
-options = struct('n_try', 3, 'para', false, 'verbose', true, ...
+options = struct('n_try', 3, 'para', false, 'verbose',false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
 T = 2;
 
-[mgm Like_mgm]= MGM.Train1(X(:,1:V), G_idx, T, K, options);
+[mgm Like_mgm]= MGM.Train1(X(:,1:V), G_idx_graph, T, K, options);
 [~,R_idx_mgm]= max(mgm.phi,[],2);
 [ scores_mgm ] = lib.anomaly_score_rd( G_idx, R_idx_mgm, M,K  );
 
 save(strcat('./Result/dblpMGM_',int2str(M),'.mat'),'scores_mgm');
+fprintf('MGM: M = %d Finished\n',M);
 end

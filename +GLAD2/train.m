@@ -49,7 +49,6 @@ for hyperIter = 1: hyperMax
      [hyper_para.B, hyper_para.theta, hyper_para.beta] =  emp_Bayes (X,Y,hyper_para,var_para);
 
 end
-fprintf('Training Finished \n');
 % lik = [lik,lik_new];
 % plot(1:length(lik), lik);
 

@@ -3,12 +3,12 @@ clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 
 global verbose;
-verbose = 1;
+verbose = 0;
 import lib.*
 
-for M = [50,80,100]
+for M = [50 100 200];
 K = 4;
-sz_group = 100;
+sz_group = 20;
 N = sz_group *M;
 G_idx = [];
 for m = 1:M
@@ -39,8 +39,11 @@ tic;
 [var_para_glad , hyper_para_glad] = GLAD2.train(data,hyper_para);
 run_time = toc;
 [~,R_idx_glad]= max(var_para_glad.mu);
+[~,G_idx_glad]= max(var_para_glad.lambda);
+
 [ scores_glad ] = lib.anomaly_score_rd( G_idx, R_idx_glad, M,K  );
 
 %%
 save(strcat('./Result/dblpGlad_',int2str(M),'.mat'),'scores_glad');
+fprintf('GLAD: M = %d Finished\n',M);
 end
