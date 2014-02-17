@@ -23,7 +23,7 @@ clear;
 import lib.*;
 import Cal.*;
 
-Ms = [5 10 20];% 50 100 200];
+Ms = [5 10 20  ];% 100 200];
 thres = 0.2;
 
 for i = 1:length(Ms)
@@ -54,13 +54,14 @@ for i = 1:length(Ms)
 
     
 end
-hold all;
+
 % plot(prec_glad);
 % plot(prec_lda);
-plot(prec_mgm);
+% plot(prec_mgm);
 
 mean(prec_glad)
-mean(prec_lda);
+mean(prec_lda)
+mean(prec_mgm)
 
 % prec_mgm = cal_anomaly_prec( bad_idx, scores_mgm, thres );
 

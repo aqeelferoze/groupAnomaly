@@ -6,10 +6,12 @@ global verbose;
 verbose = 0;
 import lib.*
 
-for M = [50 100 200];
+N = 1000;
 K = 4;
-sz_group = 20;
-N = sz_group *M;
+for M = [5 10 20 50 ];
+
+sz_group = N/M;
+
 G_idx = [];
 for m = 1:M
     G_idx = [G_idx ; m*ones(sz_group,1)];
@@ -41,9 +43,9 @@ run_time = toc;
 [~,R_idx_glad]= max(var_para_glad.mu);
 [~,G_idx_glad]= max(var_para_glad.lambda);
 
-[ scores_glad ] = lib.anomaly_score_rd( G_idx, R_idx_glad, M,K  );
+[ scores_glad ] = lib.anomaly_score_rd( G_idx_glad, R_idx_glad, M,K  );
 
 %%
-save(strcat('./Result/dblpGlad_',int2str(M),'.mat'),'scores_glad');
+save(strcat('./Result/gladDBLP_',int2str(M),'.mat'),'scores_glad','R_idx_glad','G_idx_glad');
 fprintf('GLAD: M = %d Finished\n',M);
 end

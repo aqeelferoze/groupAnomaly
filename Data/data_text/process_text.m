@@ -38,8 +38,9 @@ num_term = size(Mdt, 2);
 load('dblp_4area_abstract.mat');
 [num_doc, num_conf] = size(Mdc);
 
-for M = [5 10 20 50 100 200];
-thres = 0.2;sz_group = 20; 
+N = 1000;
+for M = [5 10 20 50 ];
+thres = 0.2;sz_group = N/M; 
 Pr = ceil(M*thres);
 bad_idx = randperm(M,Pr);
 good_idx = setdiff([1:M],bad_idx);
