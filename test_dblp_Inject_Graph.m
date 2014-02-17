@@ -64,7 +64,7 @@ for M = [5 10 20 ];
        
     
     %%
-    save(strcat('./Result/GraphDBLP2_',int2str(M),'.mat'),'scores_graph_mgm','scores_graph_lda','R_idx_graph_mgm','R_idx_graph_lda','G_idx_graph');
+    save(strcat('./Result/graphDBLP_',int2str(M),'.mat'),'scores_graph_mgm','scores_graph_lda','R_idx_graph_mgm','R_idx_graph_lda','G_idx_graph');
  
     fprintf('MGM: M = %d Finished\n',M);
 end

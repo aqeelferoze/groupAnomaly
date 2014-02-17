@@ -40,10 +40,10 @@ for M = [5 10 20];
     import LDA.*
 
     options = struct('n_try', 3, 'para', false, 'verbose', true, ...
-            'epsilon', 1e-2, 'max_iter', 30, 'ridge', 1e-2);
+            'epsilon', 1e-2, 'max_iter', 20, 'ridge', 1e-2);
     [lda_g Like_lda_g]= LDA.Train(X, G_idx_mmsb, K, options);
     [~,R_idx_mmsb_lda]= max(lda_g.phi,[],2);
-    [ scores_mmsb_lda ] = lib.anomaly_score_rd( G_idx_mmsb, R_idx_lda, M,K  );    
+    [ scores_mmsb_lda ] = lib.anomaly_score_rd( G_idx_mmsb, R_idx_mmsb_lda, M,K  );    
      
     %% MMSB-MGM
     
