@@ -17,7 +17,7 @@ for M = [5 10 20];
     end
 
 
-    fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
+    fname = strcat('./Data/data_text/dblp2_anomaly_',int2str(M),'.mat');
     load(fname);
     X = X(:,1:1000);
     V = size(X,2);

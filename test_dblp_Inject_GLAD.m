@@ -16,7 +16,7 @@ G_idx = [];
 for m = 1:M
     G_idx = [G_idx ; m*ones(sz_group,1)];
 end
-fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
+fname = strcat('./Data/data_text/dblp2_anomaly_',int2str(M),'.mat');
 load(fname);
 X = X(:,1:1000);
 %% do something to make multi-nomial
