@@ -3,12 +3,12 @@ clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 
 global verbose;
-verbose = 0;
+verbose = 1;
 
 import lib.*;
 
-N = 1000;
-for M = [5 10 20 50 ];
+N = 500;
+for M = [5 10 20];
     K = 4;
     sz_group =N/M;
     G_idx = [];
@@ -19,7 +19,7 @@ for M = [5 10 20 50 ];
 
     fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
     load(fname);
-
+    X = X(:,1:1000);
     V = size(X,2);
 
      %% MMSB     

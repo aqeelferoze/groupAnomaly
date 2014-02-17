@@ -3,12 +3,12 @@ clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 
 global verbose;
-verbose = 0;
+verbose = 1;
 import lib.*
 
-N = 1000;
+N = 500;
 K = 4;
-for M = [5 10 20 50 ];
+for M = [5 10 20 ];
 
 sz_group = N/M;
 
@@ -18,7 +18,7 @@ for m = 1:M
 end
 fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
 load(fname);
-
+X = X(:,1:1000);
 %% do something to make multi-nomial
 pr = full(lib.mnormalize(X,2));
 [~,max_idx] = max(pr,[],2);

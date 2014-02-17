@@ -7,8 +7,8 @@ global verbose
 import GLAD2.*;
 import lib.*;
 if(nargin < 5)
-    varMax = 50;
-    thres = 1e-5;
+    varMax = 30;
+    thres = 1e-2;
 end
 
 lik = [];
@@ -27,9 +27,9 @@ for varIter = 1 : varMax
         break;
     end
     
-%     if(lik_new < lik_old)
-%         break;
-%     end
+    if(lik_new < lik_old)
+        break;
+    end
     lik_old= lik_new;
     lik = [lik,lik_new];
     

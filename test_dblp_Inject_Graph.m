@@ -7,9 +7,9 @@ verbose = 1;
 
 import lib.*;
 
-N = 1000;
+N = 500;
 K = 4;
-for M = [5 ]%10 20 50 ];
+for M = [5 10 20 ];
 
     sz_group = N/M;
 
@@ -17,8 +17,9 @@ for M = [5 ]%10 20 50 ];
     for m = 1:M
         G_idx = [G_idx ; m*ones(sz_group,1)];
     end
-    fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat');
+    fname = strcat('./Data/data_text/dblp2_anomaly_',int2str(M),'.mat');
     load(fname);
+    X = X(:,1:1000);
 
     %% Graph
     import graphcut.* ;
@@ -29,8 +30,8 @@ for M = [5 ]%10 20 50 ];
     %% Graph-LDA
     import LDA.*
 
-    options = struct('n_try', 3, 'para', false, 'verbose', false, ...
-            'epsilon', 1e-2, 'max_iter', 30, 'ridge', 1e-2);
+    options = struct('n_try', 3, 'para', false, 'verbose', true, ...
+            'epsilon', 1e-2, 'max_iter', 20, 'ridge', 1e-2);
     [lda_g Like_lda_g]= LDA.Train(X, G_idx_graph, K, options);
     [~,R_idx_graph_lda]= max(lda_g.phi,[],2);
     [ scores_graph_lda ] = lib.anomaly_score_rd( G_idx_graph, R_idx_graph_lda, M,K  );    
@@ -63,7 +64,7 @@ for M = [5 ]%10 20 50 ];
        
     
     %%
-    save(strcat('./Result/GraphDBLP_',int2str(M),'.mat'),'scores_graph_mgm','scores_graph_lda','R_idx_graph_mgm','R_idx_graph_lda','G_idx_graph');
+    save(strcat('./Result/GraphDBLP2_',int2str(M),'.mat'),'scores_graph_mgm','scores_graph_lda','R_idx_graph_mgm','R_idx_graph_lda','G_idx_graph');
  
     fprintf('MGM: M = %d Finished\n',M);
 end

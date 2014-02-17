@@ -38,8 +38,8 @@ num_term = size(Mdt, 2);
 load('dblp_4area_abstract.mat');
 [num_doc, num_conf] = size(Mdc);
 
-N = 1000;
-for M = [5 10 20 50 ];
+N = 500;
+for M = [5 10 20 ];
 thres = 0.2;sz_group = N/M; 
 Pr = ceil(M*thres);
 bad_idx = randperm(M,Pr);
@@ -48,12 +48,12 @@ good_idx = setdiff([1:M],bad_idx);
 
 
 N = M * sz_group;
-kdd_idx = 11;cvpr_idx = 3;
+kdd_idx = 11;icml_idx = 9;
 kdd_doc = find(Mdc(:,kdd_idx)==1);
-cvpr_doc = find(Mdc(:,cvpr_idx)==1);
+icml_doc = find(Mdc(:,icml_idx)==1);
 
 num_kdd = length(kdd_doc);
-num_cvpr = length(cvpr_doc);
+num_icml = length(icml_doc);
 
 num_term = size(Mdt,2);
 X = zeros(N,num_term);
@@ -73,8 +73,8 @@ for m = good_idx
 end
 
 for m= bad_idx
-    select_idx = randperm(num_cvpr,sz_group);
-    idx = cvpr_doc(select_idx);
+    select_idx = randperm(num_icml,sz_group);
+    idx = icml_doc(select_idx);
     st = (m-1)*sz_group + 1;
     ed =  m *  sz_group;
     doc_idx(m,:) = idx;
@@ -107,7 +107,7 @@ end
 
 Y = sparse(Y);
 
-save(strcat('./Data/data_text/dblp_anomaly_',int2str(M),'.mat'),'X','Y','bad_idx');
+save(strcat('./Data/data_text/dblp2_anomaly_',int2str(M),'.mat'),'X','Y','bad_idx');
 fprintf('Data generated M = %d \n',M);
 
 end
