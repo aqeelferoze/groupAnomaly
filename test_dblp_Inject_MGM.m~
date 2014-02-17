@@ -31,16 +31,14 @@ X(:,const_idx)=[];
 
 %%
 V = size(X,2);
-if(N <V)
-    V = N-1;
-end
+if(N
 
 import MGM.*;
 options = struct('n_try', 3, 'para', false, 'verbose', true, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
 T = 2;
 
-[mgm Like_mgm]= MGM.Train1(X(:,1:V), G_idx, T, K, options);
+[mgm Like_mgm]= MGM.Train1(X(:,:), G_idx, T, K, options);
 [~,R_idx_mgm]= max(mgm.phi,[],2);
 [ scores_mgm ] = lib.anomaly_score_rd( G_idx, R_idx_mgm, M,K  );
 
