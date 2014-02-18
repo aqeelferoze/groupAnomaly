@@ -40,18 +40,21 @@ for i = 1:length(Ms)
     Rstname = strcat('./Result/graphDBLP_',int2str(M),'.mat');
     load(Rstname);
 
-%     
-%     
-%     Rstname = strcat('./Result/mmsbDBLP_',int2str(M),'.mat');
-%     load(Rstname);
+    
+    
+    Rstname = strcat('./Result/mmsbDBLP_',int2str(M),'.mat');
+    load(Rstname);
    
     
     prec_glad(i) = cal_anomaly_prec( bad_idx, scores_glad, thres );
     prec_graph_lda(i) = cal_anomaly_prec( bad_idx, scores_graph_lda, thres);
-    
-  
+     
     prec_graph_mgm(i) = cal_anomaly_prec( bad_idx, scores_graph_mgm, thres);
-
+    
+    
+    prec_mmsb_lda(i) = cal_anomaly_prec( bad_idx, scores_mmsb_lda, thres);
+     
+    prec_mmsb_mgm(i) = cal_anomaly_prec( bad_idx, scores_mmsb_lda, thres);
     
 end
 
@@ -62,6 +65,8 @@ end
 mean(prec_glad)
 mean(prec_graph_lda)
 mean(prec_graph_mgm)
+mean(prec_mmsb_lda)
+mean(prec_mmsb_mgm)
 
 % prec_mgm = cal_anomaly_prec( bad_idx, scores_mgm, thres );
 
