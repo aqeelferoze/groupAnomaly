@@ -57,7 +57,6 @@ for M = [5 10 20 ];
     options = struct('n_try', 3, 'para', false, 'verbose',false, ...
             'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
     T = 2;
-
     [mgm Like_mgm]= MGM.Train1(X(:,1:V), G_idx_graph, T, K, options);
     [~,R_idx_graph_mgm]= max(mgm.phi,[],2);
     [ scores_graph_mgm ] = lib.anomaly_score_rd( G_idx_graph, R_idx_graph_mgm, M,K  );

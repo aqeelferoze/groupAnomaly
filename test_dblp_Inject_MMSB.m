@@ -46,7 +46,15 @@ for M = [5 10 20];
     [ scores_mmsb_lda ] = lib.anomaly_score_rd( G_idx_mmsb, R_idx_mmsb_lda, M,K  );    
      
     %% MMSB-MGM
-    
+    V = size(X,2);
+    if(N <V)
+        V = N-1;
+    end
+
+    import MGM.*;
+    options = struct('n_try', 3, 'para', false, 'verbose',false, ...
+            'epsilon', 1e-2, 'max_iter', 20, 'ridge', 1e-2);
+    T = 2;
     [mgm Like_mgm]= MGM.Train1(X(:,1:V), G_idx_mmsb, T, K, options);
     [~,R_idx_mmsb_mgm]= max(mgm.phi,[],2);
     [ scores_mmsb_mgm ] = lib.anomaly_score_rd( G_idx_mmsb, R_idx_mmsb_mgm, M,K  );
