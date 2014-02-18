@@ -19,10 +19,22 @@ for M = [5 10 20];
 
     fname = strcat('./Data/data_text/NSF_anomaly_',int2str(M),'.mat');
     load(fname);
-    X = X(:,1:1000);
-    V = size(X,2);
+    
+    %% do something to remove constant column
+    V0 = size(X,2);
+    const_idx = [];
+    for v = 1:V0
+        if(numel(unique(X(:,v)))==1)
+            const_idx = [const_idx,v];
+        end
+    end
 
-     %% MMSB     
+    X(:,const_idx)=[];
+    
+    X = X(:,1:1000);
+
+     %% MMSB   
+    V = size(X,2);
     hyper_para.alpha = ones(1,M) * 0.01;
     hyper_para.B = eye(M,M)*0.8 + 0.1;
     hyper_para.beta = lib.mnormalize(rand(K,V),2);
@@ -46,9 +58,9 @@ for M = [5 10 20];
     [ scores_mmsb_lda ] = lib.anomaly_score_rd( G_idx_mmsb, R_idx_mmsb_lda, M,K  );    
     
     fprintf('*******Done with MMSB-LDA ******* \n');
-     
+
     %% MMSB-MGM
-    V = size(X,2);
+    
     if(N <V)
         V = N-1;
     end

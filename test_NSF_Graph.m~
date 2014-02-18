@@ -25,20 +25,7 @@ for M = [5 10 20 ];
     import graphcut.* ;
     [G_idx_graph,Pi,cost]= grPartition(Y,M);
     fprintf('*******Done with Graph ******* \n');
-     
-    
-    %% do something to remove constant column
-    V0 = size(X,2);
-    const_idx = [];
-    for v = 1:V0
-        if(numel(unique(X(:,v)))==1)
-            const_idx = [const_idx,v];
-        end
-    end
-
-    X(:,const_idx)=[];
-    
-    X = X(:,1:1000);
+       
     
     %% Graph-LDA
     import LDA.*
