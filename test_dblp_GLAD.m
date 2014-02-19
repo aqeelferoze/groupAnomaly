@@ -8,8 +8,8 @@ import lib.*
 
 N = 500;
 K = 4;
-conf_idx = 4;
-for M = [5 10 20 ];
+for conf_idx = [1 17 19]
+for M = [5 10 20 50];
 
     sz_group = N/M;
 
@@ -49,4 +49,5 @@ for M = [5 10 20 ];
     %%
     save(strcat('./Result/gladDBLP_',int2str(M),'_',int2str(conf_idx),'.mat'),'scores_glad','R_idx_glad','G_idx_glad');
     fprintf('GLAD: M = %d Finished\n',M);
+end
 end

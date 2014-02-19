@@ -23,10 +23,10 @@ clear;
 import lib.*;
 import Cal.*;
 
-Ms = [5 10  20];% 100 200];
+Ms = [5 10  20 50];% 100 200];
 thres = 0.2;
 N = 500;
-conf_idx = 3;
+conf_idx = 4;
 for i = 1:length(Ms)
     M = Ms(i);
     
@@ -72,9 +72,9 @@ for i = 1:length(Ms)
     
 end
 
-plot(prec_glad);
-plot(prec_lda);
-plot(prec_mgm);
+% plot(prec_glad);
+% plot(prec_lda);
+% plot(prec_mgm);
 
 mean(prec_glad)
 mean(prec_graph_lda)

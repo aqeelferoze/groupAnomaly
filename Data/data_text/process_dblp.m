@@ -40,8 +40,8 @@ load('dblp_4area_abstract.mat');
 
 N = 500;
 
-conf_idx = [4];
-for M = [5 10 20 ];
+for conf_idx = [1 17 19]
+for M = [5 10 20 50];
     thres = 0.2;sz_group = N/M; 
     Pr = ceil(M*thres);
     bad_idx = randperm(M,Pr);
@@ -112,7 +112,7 @@ for M = [5 10 20 ];
     fprintf('Data generated M = %d \n',M);
 
 end
-
+end
     
  
 

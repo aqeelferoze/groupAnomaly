@@ -7,8 +7,9 @@ verbose = 1;
 
 import lib.*;
 
-N = 500; conf_idx = 4;
-for M = [5 10 20];
+N = 500; 
+for conf_idx = [1 17 19]
+for M = [5 10 20 50];
     K = 4;
     sz_group =N/M;
     G_idx = [];
@@ -71,4 +72,5 @@ for M = [5 10 20];
  
     fprintf('MGM: M = %d Finished\n',M);
 
+end
 end
