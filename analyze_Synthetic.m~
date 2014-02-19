@@ -96,7 +96,7 @@ std_mmsb_mgm = std(prec_mmsb_mgm);
 % hold off;
 %%
 
-boxplot([prec_glad(:),prec_mmsb_mgm(:),prec_mmsb_lda(:),prec_graph_mgm(:),prec_graph_lda(:)]);
+boxplot([prec_glad(:),prec_mmsb_mgm(:)]);
 legend('GLAD','MMSB-MGM','MMSB-LDA','Graph-MGM', 'Graph-LDA');
 
 
