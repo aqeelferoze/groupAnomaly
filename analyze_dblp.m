@@ -26,23 +26,24 @@ import Cal.*;
 Ms = [5 10  20];% 100 200];
 thres = 0.2;
 N = 500;
+conf_idx = 3;
 for i = 1:length(Ms)
     M = Ms(i);
     
-    Datname =strcat('./Data/data_text/dblp2_anomaly_',int2str(M),'.mat');
+    Datname =strcat('./Data/data_text/dblp_anomaly_',int2str(M),'_',int2str(conf_idx),'.mat');
     load(Datname);
     
-    Rstname = strcat('./Result/gladDBLP_',int2str(M),'.mat');
+    Rstname = strcat('./Result/gladDBLP_',int2str(M),'_',int2str(conf_idx),'.mat');
     load(Rstname);
     
     
     
-    Rstname = strcat('./Result/graphDBLP_',int2str(M),'.mat');
+    Rstname = strcat('./Result/graphDBLP_',int2str(M),'_',int2str(conf_idx),'.mat');
     load(Rstname);
 
     
     
-    Rstname = strcat('./Result/mmsbDBLP_',int2str(M),'.mat');
+    Rstname = strcat('./Result/mmsbDBLP_',int2str(M),'_',int2str(conf_idx),'.mat');
     load(Rstname);
     
     
@@ -71,9 +72,9 @@ for i = 1:length(Ms)
     
 end
 
-% plot(prec_glad);
-% plot(prec_lda);
-% plot(prec_mgm);
+plot(prec_glad);
+plot(prec_lda);
+plot(prec_mgm);
 
 mean(prec_glad)
 mean(prec_graph_lda)
@@ -81,6 +82,6 @@ mean(prec_graph_mgm)
 mean(prec_mmsb_lda)
 mean(prec_mmsb_mgm)
 
-% prec_mgm = cal_anomaly_prec( bad_idx, scores_mgm, thres );
+
 
 

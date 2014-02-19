@@ -7,7 +7,7 @@ verbose = 1;
 
 import lib.*;
 
-N = 500; i = 3;
+N = 500; conf_idx = 4;
 for M = [5 10 20];
     K = 4;
     sz_group =N/M;
@@ -17,7 +17,7 @@ for M = [5 10 20];
     end
 
 
-    fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'_',int2str(i),'.mat');
+    fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'_',int2str(conf_idx),'.mat');
     load(fname);
     X = X(:,1:1000);
     V = size(X,2);
@@ -67,7 +67,7 @@ for M = [5 10 20];
     [ scores_mmsb_mgm ] = lib.anomaly_score_rd( G_idx_mmsb, R_idx_mmsb_mgm, M,K  );
         
     %%
-    save(strcat('./Result/mmsbDBLP_',int2str(M),'_',int2str(i),'.mat'),'scores_mmsb_mgm','scores_mmsb_lda','R_idx_mmsb_mgm','R_idx_mmsb_lda','G_idx_mmsb');
+    save(strcat('./Result/mmsbDBLP_',int2str(M),'_',int2str(conf_idx),'.mat'),'scores_mmsb_mgm','scores_mmsb_lda','R_idx_mmsb_mgm','R_idx_mmsb_lda','G_idx_mmsb');
  
     fprintf('MGM: M = %d Finished\n',M);
 

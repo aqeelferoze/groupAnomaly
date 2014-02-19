@@ -8,7 +8,7 @@ import lib.*
 
 N = 500;
 K = 4;
-i = 3;
+conf_idx = 4;
 for M = [5 10 20 ];
 
     sz_group = N/M;
@@ -17,7 +17,7 @@ for M = [5 10 20 ];
     for m = 1:M
         G_idx = [G_idx ; m*ones(sz_group,1)];
     end
-    fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'_',int2str(i),'.mat');
+    fname = strcat('./Data/data_text/dblp_anomaly_',int2str(M),'_',int2str(conf_idx),'.mat');
     load(fname);
     X = X(:,1:1000);
     %% do something to make multi-nomial
@@ -47,6 +47,6 @@ for M = [5 10 20 ];
     [ scores_glad ] = lib.anomaly_score_rd( G_idx_glad, R_idx_glad, M,K  );
 
     %%
-    save(strcat('./Result/gladDBLP_',int2str(M),'_',int2str(i),'.mat'),'scores_glad','R_idx_glad','G_idx_glad');
+    save(strcat('./Result/gladDBLP_',int2str(M),'_',int2str(conf_idx),'.mat'),'scores_glad','R_idx_glad','G_idx_glad');
     fprintf('GLAD: M = %d Finished\n',M);
 end
