@@ -8,7 +8,7 @@ verbose = 1;
 import lib.*;
 
 N = 500; 
-for conf_idx = [1 17 19]
+for conf_idx = [19]
 for M = [5 10 20 50];
     K = 4;
     sz_group =N/M;
@@ -47,7 +47,16 @@ for M = [5 10 20 50];
     [ scores_mmsb_lda ] = lib.anomaly_score_rd( G_idx_mmsb, R_idx_mmsb_lda, M,K  );    
     
     fprintf('*******Done with MMSB-LDA ******* \n');
-     
+    %% do something to remove constant column
+    V0 = size(X,2);
+    const_idx = [];
+    for v = 1:V0
+        if(numel(unique(X(:,v)))==1)
+            const_idx = [const_idx,v];
+        end
+    end
+
+    X(:,const_idx)=[];
     %% MMSB-MGM
     V = size(X,2);
     if(N <V)
