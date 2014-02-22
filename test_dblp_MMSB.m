@@ -8,7 +8,7 @@ verbose = 1;
 import lib.*;
 
 N = 500; 
-for conf_idx = [19]
+for conf_idx = [2,5,6,7,8]
 for M = [5 10 20 50];
     K = 4;
     sz_group =N/M;
@@ -57,11 +57,13 @@ for M = [5 10 20 50];
     end
 
     X(:,const_idx)=[];
-    %% MMSB-MGM
+    
     V = size(X,2);
     if(N <V)
         V = N-1;
     end
+    %% MMSB-MGM
+
 
     import MGM.*;
     options = struct('n_try', 3, 'para', false, 'verbose',true, ...
