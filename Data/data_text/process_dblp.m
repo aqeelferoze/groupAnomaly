@@ -40,7 +40,7 @@ load('dblp_4area_abstract.mat');
 
 N = 500;
 
-for conf_idx = [2,5,6,7,8]
+for conf_idx = [10:15]
 for M = [5 10 20 50];
     thres = 0.2;sz_group = N/M; 
     Pr = ceil(M*thres);

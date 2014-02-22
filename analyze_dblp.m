@@ -18,15 +18,14 @@
 
 %%
 
-clc;
-clear;
+
 import lib.*;
 import Cal.*;
 
-Ms = [5 10  20  ];% 100 200];
+Ms = [5 10  20  50];% 100 200];
 thres = 0.2;
 N = 500;
-conf_idx = 4;
+conf_idx = 7;
 for i = 1:length(Ms)
     M = Ms(i);
     

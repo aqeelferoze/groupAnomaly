@@ -29,18 +29,21 @@ fprintf('*******Done with Graph******* \n');
 
 %% GLAD
 import GLAD2.*; 
+hyper_para.M=10;
 var_para_glad = GLAD2.train(data,hyper_para);
 [~,G_idx_glad]= max(var_para_glad.lambda);
 G_idx_glad = lib.align_index (G_idx_glad,data.G);
 
 fprintf('*******Done with GLAD******* \n');
 
-%%
+
 import Plot.*;
 h = figure;
-plot_E(data.Y,G_idx_conn); title('Graph');
-% subplot(1,4,1), plot_E(data.Y,data.G');title('Ground Truth');
-% subplot(1,4,2), plot_E(data.Y,G_idx_glad);  title('GLAD');
+% plot_E(data.Y,G_idx_conn); title('Graph');
+% subplot(1,4,1), 
+% plot_E(data.Y,data.G');title('Ground Truth');
+% subplot(1,4,2),
+plot_E(data.Y,G_idx_glad);  title('GLAD');
 % subplot(1,4,3), plot_E(data.Y,G_idx_mmsb); title('MMSB');
 % subplot(1,4,4), plot_E( data.Y,G_idx_conn); title('Graph');
 
