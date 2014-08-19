@@ -10,7 +10,6 @@ B = hyper_para.B;
 phiL = var_para.phiL;
 phiR = var_para.phiR;
 gama = var_para.gama;
-nC = hyper_para.nC;
 [M, N] = size(gama);
 phiL_new = zeros(N,N,M);
 phiR_new = zeros(N,N,M);
@@ -23,7 +22,7 @@ end
  for p = 1: N
     for q = 1: N
 
-            f = Y(p,q)* log(B)+(nC-Y(p,q))*log(1-B); 
+            f = Y(p,q)* log(B)+(1-Y(p,q))*log(1-B); 
 
             phiL_new(p,q,:) = f1(:,p) + f *reshape(phiR(q,p,:),[M,1]);
             phiR_new(q,p,:) = f1(:,q) + f'*reshape(phiL(p,q,:),[M,1]);
