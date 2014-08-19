@@ -8,7 +8,7 @@ beta_true = hyper_para_true.beta ;
 theta_true=hyper_para_true.theta;
 
 alpha = alpha_true;
-B = ones(size(B_true))*0.5;
+B = ones(size(B_true))*0.2;
 [~,V]  = size(beta_true);
 [K,M] = size(theta_true);
 beta = ones(K,V)*1/V;

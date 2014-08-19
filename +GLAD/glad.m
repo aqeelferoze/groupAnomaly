@@ -13,7 +13,7 @@ if nargin >2
 end
 hyperMax = 20 ;
 varMax = 20;
-thres = 1e-2;
+thres = 1e-4;
 
 
 
