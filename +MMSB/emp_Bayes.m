@@ -19,10 +19,10 @@ B = nan(M,M);
 
 for g =1:M
         for h = 1:M
-            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)'))/sum(sum(phiL(:,:,g).* phiR(:,:,h)'));
+            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)))/sum(sum(phiL(:,:,g).* phiR(:,:,h)));
        end
 end
-B = B / hyper_para.nC;
+
 % ---------End update B
 
 

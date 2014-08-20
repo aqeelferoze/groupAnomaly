@@ -10,15 +10,7 @@ import lib.*
 N = size(Y,1);
 M = size(hyper_para.B,1);
 
-if(nargin ==2)
-% hyper- parameter EM
-%----
-hyper_para.alpha = 0.1*ones(1,M);
-%---generate from Beta function---
-% hyper_para.B = betarnd (1,1, [M,M]);
-end
 
-%-------
 hyperMax = 20;
 varMax = 50;
 thres = 1e-4;

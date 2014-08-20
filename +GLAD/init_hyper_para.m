@@ -8,7 +8,9 @@ beta_true = hyper_para_true.beta ;
 theta_true=hyper_para_true.theta;
 
 alpha = alpha_true;
-B = ones(size(B_true))*0.2;
+M = length(B_true);
+B = 0.7 * eye(M)+1e-2*ones(M);
+
 [~,V]  = size(beta_true);
 [K,M] = size(theta_true);
 imax = 100;

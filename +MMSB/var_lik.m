@@ -6,7 +6,6 @@ import MMSB.*;
 import lib.*;
 alpha  = hyper_para.alpha;
 B = hyper_para.B;
-nC = hyper_para.nC;
 
 phiL = var_para.phiL;
 phiR = var_para.phiR;
@@ -25,7 +24,7 @@ gama = var_para.gama;
 phif = nan (M,M);
 for g = 1:M
     for h =1:M
-         f = Y* log(B(g,h)) +(nC-Y) *log(1-B(g,h));
+         f = Y* log(B(g,h)) +(1-Y) *log(1-B(g,h));
 %         f = log (Y*B(g,h) + (1-Y) * (1-B(g,h)));
          phif(g,h) = sum( sum(phiL(:,:,g).* phiR(:,:,h).* f));
     end
@@ -38,18 +37,28 @@ end
 for h = 1:M
          phiRpsi(h) = (psi(gama(h,:))-psi(sum(gama))) *  sum(phiR(:,:,h),2);
 end
-loggamma = N* gammaln(sum(alpha)) - N* sum(gammaln(alpha))...
-          - sum(gammaln(sum(gama))) +sum(sum(gammaln(gama)));
-      
+
+
+logPI = N* gammaln(sum(alpha)) - N* sum(gammaln(alpha))...
+          + sum((alpha-1) * (psi(gama)-repmat(psi(sum(gama)),[M,1]))) ;
 % handle exception when gamma(x) = inf
 % loggamma(~isfinite(loggamma))=0;
 
-psigama = sum((alpha-1) * (psi(gama)-repmat(psi(sum(gama)),[M,1])))...
-          - sum(diag((gama-1)'*(psi(gama)-repmat(psi(sum(gama)),[M,1]))))...
-          - sum(sum(sum(phiL.*log(phiL))))-sum(sum(sum(phiR.*log(phiR))));
+logQ =   sum(gammaln(sum(gama))) +sum(sum(gammaln(gama)))...
+         +sum(diag((gama-1)'*(psi(gama)-repmat(psi(sum(gama)),[M,1]))))...
+         + sum(sum(sum(phiL.*log(phiL))))+ sum(sum(sum(phiR.*log(phiR))));
+
+     
+logZL  = sum(phiLpsi);
+logZR  = sum(phiRpsi);
 
 
-like = loggamma + psigama + sum(sum(phif))+ sum(phiLpsi)+ sum(phiRpsi);
+
+logY = sum(sum(phif));
+
+log_like =logY + logZL + logZR  +logPI- logQ;
+log_like = log_like / N;
+like = exp(log_like);
   
 
 end
