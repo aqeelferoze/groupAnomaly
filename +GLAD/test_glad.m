@@ -12,7 +12,7 @@ bad = [0.1,0.9]';
 
 K = length(good);
 theta = zeros(K,M);
-lambda =5;
+lambda = 5;
 
 pr = 0.2;
 

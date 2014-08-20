@@ -17,7 +17,7 @@ gama = nan (M, N);
 % Paralell on groups
 for n = 1:N
     for m = 1:M
-     gama(m,n) = alpha(m) +sum(phiL(n,:,m),2)'+sum(phiR(n,:,m),2)' + sum(lambda{n}(m,:));
+     gama(m,n) = alpha(m) +sum(phiL(n,:,m),2) +sum(phiR(n,:,m),2) + sum(lambda{n}(m,:));
     end
 end
 

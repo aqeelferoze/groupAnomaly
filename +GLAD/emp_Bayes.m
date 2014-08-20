@@ -3,6 +3,7 @@ function [B, theta , beta] =  emp_Bayes (X, Y, hyper_para,var_para)
 % estimate hyper-parameters
 % Detailed explanation goes here
 % gama: M x N
+% theta: K x M
 % alpha = update_alpha(gama); % gama: M x N
 % mu: N cell, each of K x Ap 
 %---- update B
@@ -24,7 +25,7 @@ rho = 0;
 B = zeros(M,M);
 for g =1:M
         for h = 1:M
-            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)'))/( (1-rho)*sum(sum(phiL(:,:,g).* phiR(:,:,h)')));
+            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)))/( (1-rho)*sum(sum(phiL(:,:,g).* phiR(:,:,h))));
        end
 end
 % ---------End update B

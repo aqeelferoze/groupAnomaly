@@ -3,6 +3,7 @@ function [ var_para , hyper_para] = glad(data, hyper_para, hyperMaxPre, varMaxPr
 %   Detailed explanation goes here
 
 global verbose;
+
 import GLAD.*;
 import lib.*;
 
