@@ -5,8 +5,10 @@ function like = var_lik( X,Y,hyper_para,var_para )
 % mu : N cell, each of M x Ap, ksi in the derivation
 % theta: K x M 
 % gama: M x N
+
 import GLAD.*;
 import lib.*;
+
 alpha  = hyper_para.alpha;
 B = hyper_para.B;
 
@@ -78,14 +80,16 @@ end
 
 logQ = 0;
 for n = 1:N
-logQ= logQ + sum(gammaln(sum(gama))) +sum(sum(gammaln(gama)))+...
-sum(diag((gama-1)'*(psi(gama)-repmat(psi(sum(gama)),[M,1]))))+...
-sum(diag(mu{n}' * logs(mu{n})))+sum(diag(lambda{n}' * logs(lambda{n})))+...
-sum(sum(sum(phiL.*log(phiL))))-sum(sum(sum(phiR.*log(phiR))));
+    logQ = logQ + gammaln(sum(gama(:,n))) - sum(gammaln(gama(:,n)))...
+    +  (gama(:,n)-1)'* log_pi(gama(:,n))+...
+    sum(sum(mu{n}.* logs(mu{n})))+sum(sum(lambda{n} .* logs(lambda{n})));
 end
+logQ = logQ + sum(sum(sum(phiL.*log(phiL))))+ sum(sum(sum(phiR.*log(phiR))));
 
-like = logY + logZL + logZR  +logPI+logG+logR+logX- logQ;
-  
+log_like = logY + logZL + logZR  +logPI+logG+logR+logX- logQ;
+ 
+log_like = log_like / N;
+like = exp(log_like);
 
 end
 

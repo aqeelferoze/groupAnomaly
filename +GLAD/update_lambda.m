@@ -16,7 +16,7 @@ lambda = cell(1,N);
 
 for n = 1:N
     Ap = size(mu{n},2);
-    lambda{n} = exp(vpa( logs(theta)' * mu{n} + repmat(log_pi(gama(:,n)) ,[1,Ap] ) ));
+    lambda{n} = exp(vpa( logs(theta)' * mu{n} + repmat(psi(gama(:,n)) ,[1,Ap] ) ));
     lambda{n} =  mnormalize(lambda{n},1);
 
 end

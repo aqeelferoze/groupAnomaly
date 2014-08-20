@@ -43,7 +43,7 @@ for n = 1:N
 end
 
 
-theta = mnormalize(theta ,1);
+theta = mnormalize(theta 1);
 
 beta = mnormalize(beta, 2);
 

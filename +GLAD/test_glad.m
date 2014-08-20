@@ -6,7 +6,7 @@ M = 3; % K = 2
 alpha_val = 0.1;
 B = 0.9 * eye(M)+1e-2*ones(M);
 % beta = [0,1; 5,5]; % NOTE: for the Gaussian, no need to normalize
-beta = [0.9,0.1;0.2,0.8];
+beta = [0.8,0.1,0.1;0.5,0.3,0.2];
 good = [0.9,0.1]'; 
 bad = [0.1,0.9]';
 
