@@ -22,7 +22,7 @@ end
             f = Y(p,q)* log(B)+(1-Y(p,q))*log(1-B); 
 
             phiL_new(p,q,:) = f1(:,p) + f *reshape(phiR(p,q,:),[M,1]);
-            phiR_new(p,q,:) = f1(:,q) + f *reshape(phiL(p,q,:),[M,1]);
+            phiR_new(p,q,:) = f1(:,q) + f' *reshape(phiL(p,q,:),[M,1]);
     end
  end
 phiL_new = mnormalize(exp(phiL_new),3);
