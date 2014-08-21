@@ -1,6 +1,7 @@
 function plot_GLAD_main (data, hyper_para, var_para)
-import Plot.*
 %%
+import Plot.*
+
     % plot the role distribution in each group
     mu = var_para.mu;
     lambda = var_para.lambda;

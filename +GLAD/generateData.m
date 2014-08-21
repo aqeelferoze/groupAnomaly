@@ -50,7 +50,7 @@ function [data, hyper_para] = generateData(nNum, alpha_val, B, Theta, Beta, lamb
             temp = mnrnd(1,Pi(n,:));
             Gp{n}(a) = find(temp==1);
             
-            temp = mnrnd(1,Theta(:,Gp{n}(a))');
+            temp = mnrnd(1, Theta(:,Gp{n}(a))');
             Rp{n}(a) = find(temp==1);
             
             temp = mnrnd(1,Beta(Rp{n}(a),:));

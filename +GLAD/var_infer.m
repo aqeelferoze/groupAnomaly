@@ -33,7 +33,7 @@ for varIter = 1 : varMax
     end
     lik_old= lik_new;
     lik = [lik,lik_new];
-    
+ 
 end
 lik = [lik,lik_new];
 % plot(1:length(lik), lik);
