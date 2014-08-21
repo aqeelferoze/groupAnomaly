@@ -1,6 +1,14 @@
 function plot_simplex( A, d , symbol)
 %PLOT_SIMPLEX : Modificaiton of package: ternary2/ternaryc.m
 %   Plot a three dimension vector on a ternary diagram: A[3 X N];
+% d (optional): color-coded in a ternary plot. The optional parameter SYMBOL
+% determines the symbol used in the scatter plot.
+% The first three vectors define the position of a data value within the
+% ternary diagram, and the fourth vector will be plotted as a coloured
+% symbol according to its magnitude. The marker symbol can be optionally
+% defined by the marker parameter. If then, note that the marker symbol
+% must be enclosed in single quotes (e.g., 'o'). If no symbol is specified
+% a dot will be used.
 
 c1 = A(1,:)';
 c2 = A(2,:)';

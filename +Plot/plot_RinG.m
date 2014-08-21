@@ -1,4 +1,5 @@
 function hist_data = plot_RinG (G_idx,R_idx, M ,K)
+import lib.*
 ColorSet = varycolor(M);
 colormap(cool)
 %bar(rand(10,5),'stacked');

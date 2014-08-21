@@ -1,5 +1,6 @@
-% Input theta, B, beta
 function plot_GLAD_main (data, hyper_para, var_para)
+import Plot.*
+%%
     % plot the role distribution in each group
     mu = var_para.mu;
     lambda = var_para.lambda;
@@ -23,13 +24,16 @@ function plot_GLAD_main (data, hyper_para, var_para)
             R_cnt(R_idx_a)= R_cnt(R_idx_a)  + 1;
         end
        [~,  R_idx(n)] = max(R_cnt);
-    end   
+    end  
+    
     plot_RinG (G_idx,R_idx, M ,K);
     
-    
+ %%  
     % plot the re-arranged adjacent matrix
     plot_E(data.Y, G_idx);
     
-    
+ %%   
     % plot simplex of the learned parameter
+    plot_simplex(var_para.gama') % gama is the variational parameter for \pi
+    
     
