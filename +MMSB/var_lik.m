@@ -39,7 +39,7 @@ for h = 1:M
 end
 
 
-logPI = N* gammaln(sum(alpha)) - N* sum(gammaln(alpha))...
+logPI = N * gammaln(sum(alpha)) - N* sum(gammaln(alpha))...
           + sum((alpha-1) * (psi(gama)-repmat(psi(sum(gama)),[M,1]))) ;
 % handle exception when gamma(x) = inf
 % loggamma(~isfinite(loggamma))=0;
@@ -56,7 +56,7 @@ logZR  = sum(phiRpsi);
 
 logY = sum(sum(phif));
 
-log_like =logY + logZL + logZR  +logPI- logQ;
+log_like =logY + logZL + logZR + logPI - logQ;
 log_like = log_like / N;
 like = exp(log_like);
   

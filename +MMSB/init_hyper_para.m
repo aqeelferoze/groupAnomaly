@@ -1,4 +1,4 @@
-function [ hyper_para ] = init_hyper_para( hyper_para_true )
+function [ hyper_para ] = init_hyper_para(hyper_para_true)
 %INIT_HYPER_PARA Summary of this function goes here
 %   Detailed explanation goes here
 import lib.*

@@ -15,7 +15,7 @@ hyperMax = 20;
 varMax = 50;
 thres = 1e-4;
 
-var_para = new_var_para(hyper_para, N,M);
+var_para = new_var_para0(hyper_para, N, M);
 lik_old  = var_lik (Y, hyper_para,var_para);
 %--- Get the initial values
 

@@ -8,13 +8,13 @@ phiL = var_para.phiL;
 phiR = var_para.phiR;
 
 
-M = length (alpha);
+M = length(alpha);
 N = size(phiL, 1);
-gama = nan (M, N);
+gama = nan(M, N);
 
 % Paralell on groups
 for m = 1:M
-    gama(m,:) = repmat(alpha(m),[1,N])+sum(phiL(:,:,m),2)'+sum(phiR(:,:,m),2)' ;
+    gama(m,:) = repmat(alpha(m),[1,N])+sum(phiL(:,:,m),2)'+sum(phiR(:,:,m),1);
 end
 
 % Parallel on individual
