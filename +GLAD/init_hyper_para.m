@@ -1,4 +1,4 @@
-function [ hyper_para ] = init_hyper_para( hyper_para_true )
+function [ hyper_para_init ] = init_hyper_para( hyper_para_true )
 %INIT_HYPER_PARA Summary of this function goes here
 %   Detailed explanation goes here
 import lib.*
@@ -7,19 +7,21 @@ B_true= hyper_para_true.B;
 beta_true = hyper_para_true.beta ;
 theta_true=hyper_para_true.theta;
 
-alpha = alpha_true;
+
 M = length(B_true);
-B = 0.7 * eye(M)+1e-2*ones(M);
+
 
 [~,V]  = size(beta_true);
 [K,M] = size(theta_true);
 imax = 100;
-beta = mnormalize(randi(imax, [K,V]), 2);
-theta = mnormalize( randi(imax, [K,M]), 1);
 
-hyper_para.alpha=alpha;
-hyper_para.B = B;
-hyper_para.beta = beta;
-hyper_para.theta = theta;
+
+% generate initial hyper parameters
+hyper_para_init = hyper_para_true;
+hyper_para_init.alpha = alpha_true;
+hyper_para_init.B = 0.1.*eye(M)+0.3.*ones(M,M);
+hyper_para_init.beta = mnormalize(randi(imax, [K,V]), 2);
+hyper_para_init.theta = mnormalize( randi(imax, [K,M]), 1);
+
 end
 

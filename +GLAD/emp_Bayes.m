@@ -25,28 +25,11 @@ rho = 0;
 B = zeros(M,M);
 
 %  ----- parallel over groups
-% for g =1:M
-%         for h = 1:M
-%             B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)))/( (1-rho)*sum(sum(phiL(:,:,g).* phiR(:,:,h))));
-%        end
-% end
-
-% spread out
-
-for g  = 1:M
-    for h = 1:M
-        numerator = 0;
-        denominator =0;        
-        for p = 1:N
-            for q = 1:N
-                numerator =  numerator + Y(p,q) * phiL(p,q,g)*phiR(p,q,h);
-                denominator  = denominator  + phiL(p,q,g)*phiR(p,q,h);
-            end
-        end
-        B(g,h) = numerator / denominator;
-    end
-end
-           
+for g =1:M
+        for h = 1:M
+            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)))/( (1-rho)*sum(sum(phiL(:,:,g).* phiR(:,:,h))));
+       end
+end           
 % ---------End update B
 
 beta = zeros(K,V);

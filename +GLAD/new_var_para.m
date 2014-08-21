@@ -13,20 +13,8 @@ for n = 1:N
 end
 
 
-phiL = ones(N,N,M)*1/M;
-phiR = ones(N,N,M)* 1/M;
-
-for p = 1:N
-    for q = 1:N
-        phiL(p,q,:) = mnormalize(1+dirrnd (ones(1,M)),2);
-        phiR(p,q,:) = mnormalize(1+dirrnd (ones(1,M)),2);
-    end
-end
-
-var_para.phiL  = phiL;
-var_para.phiR  = phiR;
-
-
+var_para.phiL  = rand(N,N,M)/M;
+var_para.phiR  = rand(N,N,M) /M;
 var_para.gama = update_gama (hyper_para, var_para);
 
 

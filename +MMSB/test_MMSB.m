@@ -8,7 +8,7 @@ verbose =1;
 % experiment paramerters
 N = 30;
 M = 3;
-B = eye(M) * 0.8 + 0.01 * ones(M, M)
+B = eye(M) * 0.8 + 0.01 * ones(M, M);
 alpha = 0.1 * ones(1,M);
 
 % set hyper parameters
