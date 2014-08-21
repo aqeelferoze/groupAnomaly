@@ -23,8 +23,8 @@ good_idx = indices(Pr+1:end); %  anomaly
 theta(:,good_idx) = repmat(good,[1,length(good_idx)]);
 theta(:,bad_idx) = repmat(bad,[1,length(bad_idx)]);
 
-hyperMaxPre = 10;
-varMaxPre =10;
+hyperMaxPre = 60;
+varMaxPre = 100;
 
 [data, hyper_para_true] = generateData(nNum, alpha_val, B, theta, beta, lambda);
 hyper_para_init = init_hyper_para(hyper_para_true);

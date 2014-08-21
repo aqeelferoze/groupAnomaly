@@ -8,8 +8,8 @@ var_para.mu = cell(1,N);
 var_para.lambda = cell(1,N);
 for n = 1:N
     Ap = length(X{n});
-    var_para.mu{n} = ones(K,Ap)/K;
-    var_para.lambda{n} =ones(M,Ap)/M;
+    var_para.mu{n} = mnormalize(rand(K,Ap),1);
+    var_para.lambda{n} = mnormalize(rand(M,Ap),1);
 end
 
 
