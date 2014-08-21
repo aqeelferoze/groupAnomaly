@@ -4,7 +4,7 @@ clear all
 
 global verbose
 verbose =1; 
-nNum= 50;
+nNum= 25;
 M = 3; 
 alpha_val = 0.1;
 B = 0.9 * eye(M)+1e-2*ones(M);
@@ -19,7 +19,7 @@ theta = [0.9, 0.1, 0.0;
          0.0, 0.1, 0.9]'
 
 K = 3;
-lambda = 20;
+lambda = 50;
 
 pr = 0.2;
 
