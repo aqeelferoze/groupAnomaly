@@ -1,4 +1,4 @@
-clear; clc;
+%clear; clc;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NOTE: Generate the Data using Data/genSynData to pick number of groups and
 % repeat number
@@ -6,11 +6,11 @@ clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
-Ms = 2:10;
-repeat_num = 10;
-for M = 2:10
+%Ms = 2:10;
+%repeat_num = 10;
+for M = Ms:Me
     for n = 1:repeat_num
-
+    fprintf('Glad M=%d dataNo=%d/%d\n', M, n, repeat_num);
     fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load(fname);
     [K, V] = size(hyper_para.beta);  
