@@ -42,6 +42,8 @@ for n = 1:repeat_num
     X_aggregate = lib.aggregate_activity( data.X, V);
 
     scores_glad = score_var(data.X, data.Y, hyper_para_glad, var_para_glad )
+    fprintf('*******Done with GLAD iter %d ******* \n',n);
+
     save(strcat('./NewResult/gladAdams_',int2str(n),'.mat'),'G_idx_glad','R_idx_glad','scores_glad');
 end
 %%

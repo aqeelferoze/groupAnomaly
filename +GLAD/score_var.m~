@@ -12,26 +12,20 @@ lambda = var_para.lambda;
 mu = var_para.mu;
 
 M = length(alpha);
-K = size(mu{1},1);
+[K,N] = size(mu);
 cut = 0.1;
-N = length(mu);
+
 
 
 scores =zeros(M,1);
 nsample = 100;
     
 for ind = 1:nsample
-    group_role_hist = zeros(M,K);
-    for n = 1:N
-        lambda_n = lambda{n};
-        mu_n = mu{n};
-        Gs = randm(lambda_n');% approximate q(G_p| lambda)
-        Rs = randm(mu_n');% approximate q(R_p| mu)
-    
-   % calculate <logP(R|alpha)>
-        group_role_hist = group_role_hist +accumarray([Gs Rs], 1, [M, K]);
-    end
-        
+%     Gs = randm(lambda');% approximate q(G_p| lambda)
+%     Rs = randm(mu');% approximate q(R_p| mu)
+%     
+%     calculate <logP(R|alpha)>
+%     group_role_hist = accumarray([Gs Rs], 1, [M, K]);
     
     for m = 1:M
         scores(m) =scores(m) + log( mnpdf (group_role_hist(m,:),theta(:,m)')*  alpha(m));% need to average over group size
