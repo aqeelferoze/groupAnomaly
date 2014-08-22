@@ -22,14 +22,15 @@ for M = Ms
     fprintf('*******Done with MMSB ******* \n');
     
     %% MMSB-LDA 
-    import LDA.*;
+    import LDA_bow.*;
     import lib.*
-    options = struct('n_try', 3, 'para', false, 'verbose', false, ...
-        'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-     X_aggregate = lib.aggregate_activity( data.X , V);
-     G_idx_mmsb = reshape(G_idx_mmsb, [length(G_idx_mmsb),1]);
-    [lda Like_lda]= LDA.Train(X_aggregate, G_idx_mmsb, K, options);
-    [~,R_idx_mmsb_lda]= max(lda.phi,[],2);
+%     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
+%         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
+%      X_aggregate = lib.aggregate_activity( data.X , V);
+%      G_idx_mmsb = reshape(G_idx_mmsb, [length(G_idx_mmsb),1]);
+%     [lda Like_lda]= LDA.Train(X_aggregate, G_idx_mmsb, K, options);
+%     [~,R_idx_mmsb_lda]= max(lda.phi,[],2);
+    R_idx_mmsb_lda = lda_group(X_aggregate,G_idx_mmsb,K);
     R_idx_mmsb_lda = R_idx_mmsb_lda';
     
     R_aggregate = lib.aggregate_assignment(data.R, K);
