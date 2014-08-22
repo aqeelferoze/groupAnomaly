@@ -4,8 +4,6 @@ import lib.*
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
-
-import lib.*
 X_org = load('./Data/data_adams/activity.txt');
 X_org = X_org(1:5,:);
 [N,V] = size(X_org);
@@ -43,7 +41,7 @@ for n = 1:repeat_num
     R_idx_glad = lib.aggregate_assignment(R_idx_infer,K);
     X_aggregate = lib.aggregate_activity( data.X, V);
 
-    scores = score_var(data.X, data.Y, hyper_para_glad, var_para_glad )
+    scores_glad = score_var(data.X, data.Y, hyper_para_glad, var_para_glad )
     save(strcat('./NewResult/gladAdams_',int2str(n),'.mat'),'G_idx_glad','R_idx_glad','scores_glad');
 end
 %%

@@ -15,7 +15,7 @@ beta = self.beta;
 N = length(group_id);
 M = max(group_id);
 phi = mnormalize (ones(N,K), 2); % row add up to 1
-gama_old = (repmat(alpha,[M 1])+ repmat(accumarray(group_id,ones(N,1)),[1 K])/K)'; 
+gama_old = (repmat(alpha,[M 1])+ repmat(histc(group_id',[1:M] )',[1 K])/K)'; % change accumarray
 
 [epsilon, max_iter] = GetOptions(options, ...
     'epsilon', 1e-2, 'max_iter', 100);
