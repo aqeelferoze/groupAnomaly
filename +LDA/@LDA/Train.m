@@ -8,6 +8,7 @@ if nargin < 4;    options = [];    end % argument check, no options
 [epsilon, max_iter, verbose] = GetOptions(options, 'epsilon', 1e-2, 'max_iter', 100, 'verbose', true);
 
 [N V] = size(X);
+
 M = double(max(group_id));
 
 

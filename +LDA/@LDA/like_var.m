@@ -1,6 +1,7 @@
 function like = like_var(self, X, group_id)
 %LIK_VAR Summary of this function goes here
 %   Detailed explanation goes here
+% group_id: Nx1 vector
 import lib.*
 alpha = self.alpha; % K x 1
 beta = self.beta; % V x K

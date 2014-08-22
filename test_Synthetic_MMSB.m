@@ -11,15 +11,13 @@ for M = Ms
     load (fname);
     [K, V] = size(hyper_para.beta);  
 
-
     %% MMSB
     import MMSB.*; 
 
     [hyper_para_mmsb,var_para_mmsb] = MMSB.mmsb(data.Y,hyper_para);
     [~, G_idx_mmsb] = max(var_para_mmsb.gama);
-    G_idx_mmsb  = G_idx_mmsb';
     G_aggregate = lib.aggregate_assignment(data.G, M);
-    G_idx_mmsb = lib.align_index (G_idx_mmsb,G_aggregate);
+    G_idx_mmsb = lib.align_index (G_idx_mmsb,G_aggregate);% 1 x N vector
     fprintf('*******Done with MMSB ******* \n');
     
     %% MMSB-LDA 
@@ -27,7 +25,8 @@ for M = Ms
     import lib.*
     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-     X_aggregate = lib.aggregate_activity( data.X);
+     X_aggregate = lib.aggregate_activity( data.X , V);
+     G_idx_mmsb = reshape(G_idx_mmsb, [length(G_idx_mmsb),1]);
     [lda Like_lda]= LDA.Train(X_aggregate, G_idx_mmsb, K, options);
     [~,R_idx_mmsb_lda]= max(lda.phi,[],2);
     R_idx_mmsb_lda = R_idx_mmsb_lda';

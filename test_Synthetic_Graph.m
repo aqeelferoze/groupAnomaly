@@ -24,6 +24,7 @@ for M = Ms
     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
     X_aggregate = lib.aggregate_activity( data.X, V);
+    G_idx_graph = reshape(G_idx_graph,[length(G_idx_graph),1]);
 
     [lda_g Like_lda_g]= LDA.Train(X_aggregate, G_idx_graph, K, options);
     [~,R_idx_graph_lda]= max(lda_g.phi,[],2);

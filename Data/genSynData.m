@@ -6,7 +6,6 @@ N = 100;
 Ms = 2:10;
 pr = 0.2;
 
-
 for i = 1:length(Ms)
     for n = 1: 10
         M = Ms(i);
