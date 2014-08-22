@@ -18,19 +18,22 @@ K = size(beta,1);
 mu = cell(1,N);
 
 
-for n = 1:N
+parfor n = 1:N
     % count the activity
+% 	fprintf('%d',n);
     Ap = length(X{n});
     x_like = zeros(K,Ap);
-    for a = 1:Ap
-        x_like(:,a)= beta(:,X{n}(a));
-    end
+%     for a = 1:Ap
+%         x_like(:,a)= beta(:,X{n}(a));
+%     end
+    x_like(:,1:Ap)= beta(:,X{n}(1:Ap));
+    
 
     mu{n} = exp(vpa( logs(theta) * lambda{n}));
     mu{n} = mu{n} .*  x_like;
     % exp(Small Number) = 0
     mu{n} = mnormalize(mu{n},1);
 end
-
+% fprintf('\n');
 end
 

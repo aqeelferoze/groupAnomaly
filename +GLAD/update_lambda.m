@@ -14,12 +14,13 @@ mu = var_para.mu;
 N = length(mu);
 lambda = cell(1,N);
 
-for n = 1:N
+parfor n = 1:N
+	%fprintf('%d\n',n);
     Ap = size(mu{n},2);
     lambda{n} = exp(vpa( logs(theta)' * mu{n} + repmat(psi(gama(:,n)) ,[1,Ap] ) ));
     lambda{n} =  mnormalize(lambda{n},1);
 end
-
+%fprintf('\n');
 
 end
 
