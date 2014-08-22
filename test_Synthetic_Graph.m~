@@ -1,4 +1,4 @@
-% clear; clc;
+%clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
@@ -21,7 +21,7 @@ for M = Ms:Me
     fprintf('*******Done with Graph******* \n');
     %% Graph-LDA
     import LDA.*;
-    import lib.*;
+%  import lib.*;
 %     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
 %         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
 %     G_idx_graph = reshape(G_idx_graph,[length(G_idx_graph),1]);
