@@ -42,7 +42,7 @@ for g = 1:M
 end
 
 for h = 1:M
-         phiRpsi(h) = (psi(gama(h,:))-psi(sum(gama))) *  sum(phiR(:,:,h),2);
+         phiRpsi(h) = (psi(gama(h,:))-psi(sum(gama))) *  sum(phiR(:,:,h),1)';% switch the p-q index
 end
       
 % handle exception when gamma(x) = inf

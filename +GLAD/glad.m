@@ -3,7 +3,7 @@ function [ var_para , hyper_para] = glad(data, hyper_para, hyperMaxPre, varMaxPr
 %   Detailed explanation goes here
 
 global verbose;
-
+verbose =1;
 import GLAD.*;
 import lib.*;
 
@@ -49,10 +49,10 @@ for hyperIter = 1: hyperMax
      % M step
      [hyper_para.B, hyper_para.theta, hyper_para.beta] =  emp_Bayes (X,Y,hyper_para,var_para);
     
-     import Plot.*
-     close all
-     drawResult(data, var_para, hyper_para);
-     fprintf('Finish plot\n');
+%      import Plot.*
+%      close all
+%      drawResult(data, var_para, hyper_para);
+%      fprintf('Finish plot\n');
      
 end
 % lik = [lik,lik_new];

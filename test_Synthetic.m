@@ -5,14 +5,14 @@ verbose = 0;
 
 % for M =  [5,10,20,50,100]
 for M = [5,10]
-    fname = strcat('./Data/syn',int2str(M),'.mat');
+    fname = strcat('./Data/synth/syn',int2str(M),'.mat');
     load (fname);
     K = 2;
 
 
     %% 
-    import GLAD2.*; 
-    var_para_glad = GLAD2.train(data,hyper_para);
+    import GLAD.*; 
+    var_para_glad = GLAD.glad(data,hyper_para);
     [~,G_idx_glad]= max(var_para_glad.lambda);
     [~,R_idx_glad]= max(var_para_glad.mu);
     [ scores_glad ] = lib.anomaly_score(G_idx_glad,R_idx_glad, M,K);
@@ -92,7 +92,7 @@ for M = [5,10]
 
     fprintf('*******Done with Graph-MGM******* \n');
 %%
-    save(strcat('./Result/synScore',int2str(M),'_2.mat'),'scores_glad','scores_mmsb_lda','scores_mmsb_mgm',...
+    save(strcat('./NewResult/synScore',int2str(M),'_2.mat'),'scores_glad','scores_mmsb_lda','scores_mmsb_mgm',...
         'scores_graph_lda','scores_graph_mgm');
 end
 

@@ -49,11 +49,11 @@ prec_mmsb_mgm =zeros(N,T);
 for i = 1:T
     M = Ms(i);
     for n = 1:N
-    Rstname = strcat('./Result/Synth/gladScore',int2str(M),'_',int2str(n),'.mat');
+    Rstname = strcat('./NewResult/Synth/gladScore',int2str(M),'_',int2str(n),'.mat');
     load (Rstname);
-    Rstname = strcat('./Result/Synth/mmsbScore',int2str(M),'_',int2str(n),'.mat');
+    Rstname = strcat('./NewResult/Synth/mmsbScore',int2str(M),'_',int2str(n),'.mat');
     load (Rstname);
-    Rstname = strcat('./Result/Synth/graphScore',int2str(M),'_',int2str(n),'.mat');
+    Rstname = strcat('./NewResult/Synth/graphScore',int2str(M),'_',int2str(n),'.mat');
     load (Rstname);
     Datname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load(Datname);

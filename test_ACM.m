@@ -14,8 +14,6 @@ for t = 1:T
 end
 
 %parameters
-
-
 N = 100;
 M= 20;
 K = 5;

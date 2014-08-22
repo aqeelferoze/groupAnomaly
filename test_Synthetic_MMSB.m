@@ -3,12 +3,14 @@ addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
 
-
-for M = 6:10
-for n = 6:10
-    fname = strcat('./Data/syn',int2str(M),'_',int2str(n),'.mat');
+Ms = 2:10;
+repeat_num = 10;
+for M = Ms
+    for n = 1: repeat_num
+    fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load (fname);
-    K = 2;
+    [K, V] = size(hyper_para.beta);  
+
 
     %% MMSB
     import MMSB.*; 
@@ -16,20 +18,22 @@ for n = 6:10
     [hyper_para_mmsb,var_para_mmsb] = MMSB.mmsb(data.Y,hyper_para);
     [~, G_idx_mmsb] = max(var_para_mmsb.gama);
     G_idx_mmsb  = G_idx_mmsb';
-    G_idx_mmsb = lib.align_index (G_idx_mmsb,data.G);
-
-    
+    G_aggregate = lib.aggregate_assignment(data.G, M);
+    G_idx_mmsb = lib.align_index (G_idx_mmsb,G_aggregate);
     fprintf('*******Done with MMSB ******* \n');
-
-
+    
     %% MMSB-LDA 
     import LDA.*;
+    import lib.*
     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-    [lda Like_lda]= LDA.Train(data.X, G_idx_mmsb, K, options);
+     X_aggregate = lib.aggregate_activity( data.X);
+    [lda Like_lda]= LDA.Train(X_aggregate, G_idx_mmsb, K, options);
     [~,R_idx_mmsb_lda]= max(lda.phi,[],2);
     R_idx_mmsb_lda = R_idx_mmsb_lda';
-    R_idx_mmsb_lda = lib.align_index (R_idx_mmsb_lda,data.R);
+    
+    R_aggregate = lib.aggregate_assignment(data.R, K);
+    R_idx_mmsb_lda = lib.align_index (R_idx_mmsb_lda,R_aggregate);
 
     % [score_lda]= lda.score_var(G_idx_mmsb');
     [ scores_mmsb_lda ] = lib.anomaly_score(G_idx_mmsb,R_idx_mmsb_lda, M,K);
@@ -43,11 +47,13 @@ for n = 6:10
     if(numel(unique(G_idx_mmsb))==1)
         G_idx_mmsb = crossvalind('Kfold', length(G_idx_mmsb), M);
     end
-    G_idx_mmsb = reshape(G_idx_mmsb,[length(G_idx_mmsb,1]);
-    [mgm Like_mgm]= MGM.Train1(data.X, G_idx_mmsb, T, K, options);
+    G_idx_mmsb = reshape(G_idx_mmsb,[length(G_idx_mmsb),1]);
+    [mgm Like_mgm]= MGM.Train1(X_aggregate, G_idx_mmsb, T, K, options);
     [~,R_idx_mmsb_mgm]= max(mgm.phi,[],2);
     R_idx_mmsb_mgm = R_idx_mmsb_mgm';
-    R_idx_mmsb_mgm = lib.align_index (R_idx_mmsb_mgm,data.R);
+    
+    R_aggregate = lib.aggregate_assignment(data.R, K);
+    R_idx_mmsb_mgm = lib.align_index (R_idx_mmsb_mgm,R_aggregate);
 
     % [score_mgm] = mgm.ScoreVar(data.X, G_idx_mmsb');
 
@@ -56,7 +62,7 @@ for n = 6:10
     fprintf('*******Done with MMSB-MGM******* \n');
 %%
 
-    save(strcat('./Result/mmsbScore',int2str(M),'_',int2str(n),'.mat'),'G_idx_mmsb','R_idx_mmsb_lda','R_idx_mmsb_mgm','scores_mmsb_lda','scores_mmsb_mgm');
+    save(strcat('./NewResult/mmsbScore',int2str(M),'_',int2str(n),'.mat'),'G_idx_mmsb','R_idx_mmsb_lda','R_idx_mmsb_mgm','scores_mmsb_lda','scores_mmsb_mgm');
     end
 end
 
