@@ -1,8 +1,11 @@
-% clear; clc;
+%clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
 %Ms = 2:10;
+%Ms=2;
+%Me=2;
+%repeat_num = 1;
 %repeat_num = 10;
 for M = Ms:Me
     for n = 1:repeat_num
@@ -16,21 +19,17 @@ for M = Ms:Me
     import lib.*
     [G_idx_graph,Pi,cost]= grPartition(data.Y,M);
     G_aggregate = lib.aggregate_assignment(data.G, M);
-    G_idx_graph = lib.align_index (G_idx_graph,G_aggregate);
+    G_idx_graph = lib.align_index (G_idx_graph,G_aggregate)';
 
     fprintf('*******Done with Graph******* \n');
     %% Graph-LDA
     import LDA.*;
     import lib.*;
-%     options = struct('n_try', 3, 'para', false, 'verbose', false, ...
-%         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
-%     G_idx_graph = reshape(G_idx_graph,[length(G_idx_graph),1]);
-% 
-%     [lda_g Like_lda_g]= LDA.Train(X_aggregate, G_idx_graph, K, options);
-%     [~,R_idx_graph_lda]= max(lda_g.phi,[],2);
+    options = struct('n_try', 3, 'para', false, 'verbose', false, ...
+        'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
     X_aggregate = lib.aggregate_activity( data.X, V);
-    R_idx_graph_lda = lda_group(X_aggregate,G_idx_graph,K);
-
+    [lda_g Like_lda_g]= LDA.Train(X_aggregate, G_idx_graph', K, options);
+    [~,R_idx_graph_lda]= max(lda_g.phi,[],2);
     R_idx_graph_lda = R_idx_graph_lda';
     % do role alignment
     R_aggregate = lib.aggregate_assignment(data.R, K);
@@ -47,23 +46,19 @@ for M = Ms:Me
     options = struct('n_try', 3, 'para', false, 'verbose', true, ...
         'epsilon', 1e-5, 'max_iter', 50, 'ridge', 1e-2);
     T = 1;
-    if(numel(unique(G_idx_graph))==1)
-	G_idx_graph = crossvalind('Kfold',length(G_idx_graph),M);
-    end
-    G_idx_graph = reshape(G_idx_graph,[length(G_idx_graph),1]);
-    
-    [mgm_g Like_mgm_g]= MGM.Train1(X_aggregate, G_idx_graph, T, K, options);
+    [mgm_g Like_mgm_g]= MGM.Train1(X_aggregate, G_idx_graph', T, K, options);
     [~,R_idx_graph_mgm]= max(mgm_g.phi,[],2);
     R_idx_graph_mgm = R_idx_graph_mgm';
     %[score_mgmgraph] = mgm_g.ScoreVar(data.X, G_idx_graph');
     R_idx_graph_mgm = lib.align_index (R_idx_graph_mgm,R_aggregate);
     [ scores_graph_mgm] = lib.anomaly_score(G_idx_graph,R_idx_graph_mgm, M,K);
+
     fprintf('*******Done with Graph-MGM******* \n');
 %%
     save(strcat('./NewResult/graphScore',int2str(M),'_',int2str(n),'.mat'),'G_idx_graph','R_idx_graph_lda','R_idx_graph_mgm','scores_graph_lda','scores_graph_mgm');
     end
 end
 
-% exit;
+exit;
 
 
