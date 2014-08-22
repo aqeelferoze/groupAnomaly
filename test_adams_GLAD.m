@@ -5,9 +5,7 @@ addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
 X_org = load('./Data/data_adams/activity.txt');
-X_org = X_org(1:5,:);
 [N,V] = size(X_org);
-
 
 X = cell(1,N);
 for n = 1:N
@@ -22,7 +20,7 @@ data.X = X;
 data.Y= load('./Data/data_adams/E.txt');
 data.Y = double (data.Y>0);
 truth =  load('./Data/data_adams/truth.txt');
-data.Y = data.Y(1:5,1:5);
+
 
 %%
 
