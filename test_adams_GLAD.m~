@@ -1,0 +1,45 @@
+addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
+global verbose;
+verbose = 1;
+
+import lib.*
+X = load('./Data/data_adams/activity.txt');
+data.X = lib.rescale(data.X,1,20);
+data.Y= load('./Data/data_adams/E.txt');
+data.Y = double (data.Y>0);
+truth =  load('./Data/data_adams/truth.txt');
+%%
+clear; clc;
+M = 10; K = 3; V = size(data.X,2);
+repeat_num = 5;
+
+for n = 1:repeat_num
+
+fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
+load(fname);
+[K, V] = size(hyper_para.beta);  
+%% 
+import GLAD.*; 
+import lib.*
+
+[ hyper_para_init ] = init_hyper_para_void( M,K ,V);
+[var_para_glad, hyper_para_glad] = GLAD.glad(data,hyper_para_init);
+%     [~,G_idx_glad]= max(var_para_glad.gama);
+%     [~,R_idx_glad]= max(var_para_glad.mu);
+
+% get group, role index by aggregating activities
+G_idx_infer = infer_assignment(var_para_glad.lambda);
+R_idx_infer =  infer_assignment(var_para_glad.mu);
+G_idx_glad = lib.aggregate_assignment(G_idx_infer,M);
+R_idx_glad = lib.aggregate_assignment(R_idx_infer,K);
+
+[ scores_glad ] = lib.anomaly_score(G_idx_glad,R_idx_glad, M,K);
+
+%%
+save(strcat('./NewResult/gladAdams_',int2str(n),'.mat'),'G_idx_glad','R_idx_glad','scores_glad');
+end
+
+
+exit;
+
+
