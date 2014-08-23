@@ -3,10 +3,12 @@ clear;clc;
 import GLAD.*;
 import lib.*;
 
-load ('./Data/data_ACM/acm_small100.mat');
-Y_t = author_adj_100;
-X_t = doc_bow_100;
-T = length(X_t);
+load ('./Data/data_ACM/acm_bows_100.mat');
+load ('./Data/data_ACM/acm_links_100.mat');
+
+Y_t = adjmat;
+X_t = bowmat;
+T = size(X_t,3);
 
 
 %%
@@ -23,7 +25,7 @@ hyper_para_init.theta = mnormalize( randi(imax, [K,M]), 1);
 
 %%
 for t = 1:T
-    X_org = X_t{t};
+    X_org = X_t(:,:,t);
     [N,V] = size(X_org);
     X = cell(1,N);
     for n = 1:N
@@ -35,7 +37,7 @@ for t = 1:T
         X{n} =  X_n;
     end
     
-    Y  = Y_t{t};
+    Y  = Y_t(:,:,t);
     data.X = X;
     data.Y = Y;
     [hyper_para_glad,var_para_glad] = GLAD.glad(data,hyper_para_init);

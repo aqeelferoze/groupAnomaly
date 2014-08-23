@@ -8,12 +8,10 @@ if nargin < 2
   d = 1;
 end 
 
-
-
 dim= size(m);
 
-if length(dim) ==1
-    
+if length(dim) ==1   
+    x = m./sum(m);
     return
 end
 for i= 1:length(dim)
