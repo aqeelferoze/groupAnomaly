@@ -8,6 +8,7 @@ global verbose;
 verbose = 1;
 %Ms = 2:10;
 %repeat_num = 10;
+Ms = 6;Me =7; repeat_num=2;
 for M = Ms:Me
     for n = 1:repeat_num
     fprintf('Glad M=%d dataNo=%d/%d\n', M, n, repeat_num);
@@ -20,7 +21,7 @@ for M = Ms:Me
     hyper_para_init = GLAD.init_hyper_para(hyper_para); % hyper_para is the ground truth
 
     [var_para_glad, hyper_para_glad] = GLAD.glad(data,hyper_para_init);
-    save(strcat('./NewResult/gladScore',int2str(M),'_',int2str(n),'.mat'),'G_idx_glad','R_idx_glad','scores_glad');
+    save(strcat('./NewResult/gladModel',int2str(M),'_',int2str(n),'.mat'),'var_para_glad','hyper_para_glad');
 
 %     [~,G_idx_glad]= max(var_para_glad.gama);
 %     [~,R_idx_glad]= max(var_para_glad.mu);

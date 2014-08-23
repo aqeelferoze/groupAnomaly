@@ -2,13 +2,13 @@
 clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 import GLAD.*;
-N = 100;
 % Ms = 2:10;
 Ms = 6;
 pr = 0.1;
-N = 2;
+N = 100;
+repeat_num =1;
 for i = 1:length(Ms)
-    for n = 1: N
+    for n = 1: repeat_num
         M = Ms(i);
         Pr = ceil(pr*M);
         fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');

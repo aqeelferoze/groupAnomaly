@@ -1,4 +1,5 @@
 %test the GLAD on ACM dataset
+clear;clc;
 import GLAD.*;
 import lib.*;
 
@@ -11,7 +12,10 @@ T = length(X_t);
 %%
 M = 20;
 K = 4;
+V = 8025;
+
 imax = 100;
+
 hyper_para_init.alpha = 0.1 * ones(1,M);
 hyper_para_init.B = 0.1.*eye(M)+0.3.*ones(M,M);
 hyper_para_init.beta = mnormalize(randi(imax, [K,V]), 2);
@@ -30,6 +34,7 @@ for t = 1:T
         end
         X{n} =  X_n;
     end
+    
     Y  = Y_t{t};
     data.X = X;
     data.Y = Y;
