@@ -33,16 +33,16 @@ for n = 1:repeat_num
 
 
     % get group, role index by aggregating activities
-    G_idx_infer = infer_assignment(var_para_glad.lambda);
-    R_idx_infer =  infer_assignment(var_para_glad.mu);
-    G_idx_glad = lib.aggregate_assignment(G_idx_infer,M);
-    R_idx_glad = lib.aggregate_assignment(R_idx_infer,K);
-    X_aggregate = lib.aggregate_activity( data.X, V);
-
-    scores_glad = score_var(data.X, data.Y, hyper_para_glad, var_para_glad )
+%     G_idx_infer = infer_assignment(var_para_glad.lambda);
+%     R_idx_infer =  infer_assignment(var_para_glad.mu);
+%     G_idx_glad = lib.aggregate_assignment(G_idx_infer,M);
+%     R_idx_glad = lib.aggregate_assignment(R_idx_infer,K);
+%     X_aggregate = lib.aggregate_activity( data.X, V);
+% 
+%     scores_glad = score_var(data.X, data.Y, hyper_para_glad, var_para_glad )
     fprintf('*******Done with GLAD iter %d ******* \n',n);
 
-    save(strcat('./NewResult/gladAdams_',int2str(n),'.mat'),'G_idx_glad','R_idx_glad','scores_glad');
+    save(strcat('./NewResult/gladAdamsModel_',int2str(n),'.mat'),'var_para_glad','hyper_para_glad');
 end
 %%
 

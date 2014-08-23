@@ -8,7 +8,7 @@ global verbose;
 verbose = 1;
 %Ms = 2:10;
 %repeat_num = 10;
-Ms = 6;Me =7; repeat_num=2;
+Ms = 6;Me =7; repeat_num=1;
 for M = Ms:Me
     for n = 1:repeat_num
     fprintf('Glad M=%d dataNo=%d/%d\n', M, n, repeat_num);
@@ -22,7 +22,7 @@ for M = Ms:Me
 
     [var_para_glad, hyper_para_glad] = GLAD.glad(data,hyper_para_init);
     save(strcat('./NewResult/gladModel',int2str(M),'_',int2str(n),'.mat'),'var_para_glad','hyper_para_glad');
-
+    fprintf('*******Done with GLAD, Model Saved ******* \n');
 %     [~,G_idx_glad]= max(var_para_glad.gama);
 %     [~,R_idx_glad]= max(var_para_glad.mu);
 

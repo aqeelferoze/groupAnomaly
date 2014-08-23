@@ -12,8 +12,8 @@ if nargin >2
     hyperMax = hyperMaxPre;
     varMax = varMaxPre;
 end
-hyperMax = 60 ;
-varMax = 100;
+hyperMax = 20 ;
+varMax = 25;
 thres = 1e-4;
 
 
