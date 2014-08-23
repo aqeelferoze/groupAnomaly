@@ -25,16 +25,20 @@ hyper_para_init.theta = mnormalize( randi(imax, [K,M]), 1);
 
 %%
 for t = 1:T
-    X_org = X_t(:,:,t);
+    X_org = full(X_t(:,:,t));
     [N,V] = size(X_org);
     X = cell(1,N);
     for n = 1:N
         Ap = sum(X_org(n,:));
-        X_n = [];
-        for v = 1:V
-            X_n = [X_n, ones(1,X_org(n,v)) * v ];
+        if Ap<2
+            X{n} = [find(mnrnd(1,ones(1,V)/V)==1),find(mnrnd(1,ones(1,V)/V)==1)];
+        else
+            X_n = mnrnd(1,[1]);
+            for v = 1:V
+                X_n = [X_n, ones(1,X_org(n,v)) * v ];
+            end
+            X{n} =  X_n;
         end
-        X{n} =  X_n;
     end
     
     Y  = Y_t(:,:,t);
