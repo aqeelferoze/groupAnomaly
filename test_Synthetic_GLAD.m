@@ -20,6 +20,8 @@ for M = Ms:Me
     hyper_para_init = GLAD.init_hyper_para(hyper_para); % hyper_para is the ground truth
 
     [var_para_glad, hyper_para_glad] = GLAD.glad(data,hyper_para_init);
+    save(strcat('./NewResult/gladScore',int2str(M),'_',int2str(n),'.mat'),'G_idx_glad','R_idx_glad','scores_glad');
+
 %     [~,G_idx_glad]= max(var_para_glad.gama);
 %     [~,R_idx_glad]= max(var_para_glad.mu);
 

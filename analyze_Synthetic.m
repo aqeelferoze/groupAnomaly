@@ -37,7 +37,7 @@ verbose = 0;
 
 import Cal.*
 thres = 0.2;
-N =10;
+N = 3;
 % Ms= [5,10,20,50]
 Ms = 2:10;
 T = length(Ms);
@@ -49,11 +49,11 @@ prec_mmsb_mgm =zeros(N,T);
 for i = 1:T
     M = Ms(i);
     for n = 1:N
-    Rstname = strcat('./NewResult/Synth/gladScore',int2str(M),'_',int2str(n),'.mat');
+    Rstname = strcat('./NewResult/gladScore',int2str(M),'_',int2str(n),'.mat');
     load (Rstname);
-    Rstname = strcat('./NewResult/Synth/mmsbScore',int2str(M),'_',int2str(n),'.mat');
+    Rstname = strcat('./NewResult/mmsbScore',int2str(M),'_',int2str(n),'.mat');
     load (Rstname);
-    Rstname = strcat('./NewResult/Synth/graphScore',int2str(M),'_',int2str(n),'.mat');
+    Rstname = strcat('./NewResult/graphScore',int2str(M),'_',int2str(n),'.mat');
     load (Rstname);
     Datname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load(Datname);
@@ -83,21 +83,21 @@ std_mmsb_lda = std(prec_mmsb_lda);
 mean_mmsb_mgm= mean(prec_graph_mgm);
 std_mmsb_mgm = std(prec_mmsb_mgm);
 
-% hold all;
-% errorbar(Ms, [mean_glad],std_glad);
-% 
-% errorbar(Ms, [mean_graph_lda],std_graph_lda);
-% errorbar(Ms, [mean_graph_mgm],std_graph_mgm);
-% 
-% errorbar(Ms, [mean_mmsb_lda],std_mmsb_lda);
-% errorbar(Ms, [mean_mmsb_mgm],std_mmsb_mgm);
-% 
-% legend('GLAD','Graph-LDA','Graph-MGM', 'MMSB-LDA','MMSB-MGM');
-% hold off;
+hold all;
+errorbar(Ms, [mean_glad],std_glad);
+
+errorbar(Ms, [mean_graph_lda],std_graph_lda);
+errorbar(Ms, [mean_graph_mgm],std_graph_mgm);
+
+errorbar(Ms, [mean_mmsb_lda],std_mmsb_lda);
+errorbar(Ms, [mean_mmsb_mgm],std_mmsb_mgm);
+
+legend('GLAD','Graph-LDA','Graph-MGM', 'MMSB-LDA','MMSB-MGM');
+hold off;
 %%
 
-boxplot([prec_glad(:),prec_mmsb_mgm(:),prec_mmsb_lda(:),prec_graph_mgm(:),prec_graph_lda(:)]);
-legend('GLAD','MMSB-MGM','MMSB-LDA','Graph-MGM', 'Graph-LDA');
+% boxplot([prec_glad(:),prec_mmsb_mgm(:),prec_mmsb_lda(:),prec_graph_mgm(:),prec_graph_lda(:)]);
+% legend('GLAD','MMSB-MGM','MMSB-LDA','Graph-MGM', 'Graph-LDA');
 
 
 

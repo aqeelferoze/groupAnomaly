@@ -7,7 +7,7 @@ import lib.*
 alpha_val = 0.1;
 B = 0.9 * eye(M)+1e-2*ones(M);
 % beta = [0,1; 5,5]; % NOTE: for the Gaussian, no need to normalize
-beta = [0.9,0.1;0.2,0.8];
+beta = [0.4,0.3,0.15,0.1, 0.05; 0.05,0.1,0.15,0.3,0.4;];
 good = [0.9,0.1]'; % K = 2
 bad = [0.1,0.9]';
 

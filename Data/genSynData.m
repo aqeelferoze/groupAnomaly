@@ -3,14 +3,15 @@ clear; clc;
 addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 import GLAD.*;
 N = 100;
-Ms = 2:10;
-pr = 0.2;
-
+% Ms = 2:10;
+Ms = 6;
+pr = 0.1;
+N = 2;
 for i = 1:length(Ms)
-    for n = 1: 10
+    for n = 1: N
         M = Ms(i);
         Pr = ceil(pr*M);
-        fname = strcat('./synth/syn',int2str(M),'_',int2str(n),'.mat');
+        fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
         indices = randperm(M);
         bad_idx = indices(1:Pr); %  normal groups
         good_idx = indices(Pr+1:end); %  anomaly

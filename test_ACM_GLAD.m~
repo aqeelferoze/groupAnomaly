@@ -1,0 +1,15 @@
+%test the GLAD on ACM dataset
+import GLAD.*;
+import lib.*;
+
+load ('./Data/data_ACM/acm_small100.mat');
+X_t = author_adj_100;
+Y_t = doc_bow_100;
+T = length(X_t);
+for t = 1:T
+
+[hyper_para_glad,var_para_glad] = GLAD.glad(data,hyper_para_init);
+save(strcat('./NewResult/senator_',int2str(t),'.mat'),'hyper_para_glad','var_para_');
+
+
+end
