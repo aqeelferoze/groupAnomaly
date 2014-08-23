@@ -4,8 +4,8 @@ import GLAD.*;
 import lib.*;
 
 load ('./Data/data_ACM/acm_small100.mat');
-X_t = author_adj_100;
-Y_t = doc_bow_100;
+Y_t = author_adj_100;
+X_t = doc_bow_100;
 T = length(X_t);
 
 

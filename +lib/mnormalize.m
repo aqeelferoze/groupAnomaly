@@ -7,8 +7,15 @@ function x = mnormalize(m,d)
 if nargin < 2
   d = 1;
 end 
+
+
+
 dim= size(m);
 
+if length(dim) ==1
+    
+    return
+end
 for i= 1:length(dim)
     if(i ~= d)
         dim(i)= 1;
