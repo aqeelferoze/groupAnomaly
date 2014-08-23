@@ -25,7 +25,7 @@ hyper_para_init.theta = mnormalize( randi(imax, [K,M]), 1);
 
 %%
 for t = 1:T
-    X_org = X_t(:,:,t);
+    X_org = full(X_t(:,:,t)) + 1;
     [N,V] = size(X_org);
     X = cell(1,N);
     for n = 1:N
