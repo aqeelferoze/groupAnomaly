@@ -3,6 +3,7 @@ function [B, theta , beta] =  emp_Bayes (X, Y, hyper_para,var_para)
 % estimate hyper-parameters
 % Detailed explanation goes here
 % gama: M x N
+% theta: K x M
 % alpha = update_alpha(gama); % gama: M x N
 % mu: N cell, each of K x Ap 
 %---- update B
@@ -22,28 +23,40 @@ phiR = var_para.phiR;
 rho = 0;
 % alpha = update_alpha(gama);
 B = zeros(M,M);
+
+%  ----- parallel over groups
 for g =1:M
         for h = 1:M
-            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)'))/( (1-rho)*sum(sum(phiL(:,:,g).* phiR(:,:,h)')));
+            B(g,h) = sum(sum(Y.*phiL(:,:,g).* phiR(:,:,h)))/( (1-rho)*sum(sum(phiL(:,:,g).* phiR(:,:,h))));
        end
-end
+end           
 % ---------End update B
 
 beta = zeros(K,V);
 theta = zeros(K,M);
-for n = 1:N
+parfor n = 1:N
     theta = theta + mu{n} * lambda{n}';
+end
+
+for n = 1:N
     Ap = size(mu{n},2);
     mu_like = zeros(K,V);
-    for a = 1:Ap
-        mu_like(:,X{n}(a))= mu_like(:,X{n}(a))+  mu{n}(:,a);
-    end
+    X_n= zeros(V, Ap);
+    
+    ind = sub2ind(size(X_n), X{n}(:), 1:Ap);
+    X_n (ind) = 1;
+    
+    beta = beta + X_
+    
+    %for a = 1:Ap
+    %mu_like(:,X{n}(1:Ap))= mu_like(:,X{n}(1:Ap))+  mu{n}(:,1:Ap);
+    %end
             
     beta = beta + mu_like;
 end
 
 
-theta = mnormalize(theta 1);
+theta = mnormalize(theta ,1);
 
 beta = mnormalize(beta, 2);
 

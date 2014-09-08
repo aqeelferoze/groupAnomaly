@@ -8,15 +8,15 @@ import GLAD.*;
 import lib.*;
 
 %%
+
+hyperMax = 10 ;
+varMax = 50;
+thres = 1e-4;
+
 if nargin >2
     hyperMax = hyperMaxPre;
     varMax = varMaxPre;
 end
-hyperMax = 20 ;
-varMax = 25;
-thres = 1e-4;
-
-
 
 X = data.X;
 Y = data.Y;
@@ -36,7 +36,7 @@ for hyperIter = 1: hyperMax
      % Variationa E step
      % --- using variational value of old hyperIter
      if verbose
-        fprintf('--Iter = %d, likelihood =  \n',hyperIter);
+        fprintf('--Iter = %d \n ',hyperIter);
      end
      var_para = var_infer ( X, Y,  hyper_para, var_para,varMax,thres);
 %      lik_new = var_lik (X,Y, hyper_para,var_para);

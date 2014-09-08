@@ -36,13 +36,22 @@ beta = zeros(K,V);
 theta = zeros(K,M);
 parfor n = 1:N
     theta = theta + mu{n} * lambda{n}';
+end
+
+for n = 1:N
     Ap = size(mu{n},2);
-    mu_like = zeros(K,V);
+    X_n= zeros(V, Ap);
+    
+    ind = sub2ind(size(X_n), X{n}(:)', 1:Ap);
+    X_n (ind) = 1;
+    
+    beta = beta + mu{n} * X_n';
+    
     %for a = 1:Ap
-    mu_like(:,X{n}(1:Ap))= mu_like(:,X{n}(1:Ap))+  mu{n}(:,1:Ap);
-    %end
-            
-    beta = beta + mu_like;
+    %mu_like(:,X{n}(1:Ap))= mu_like(:,X{n}(1:Ap))+  mu{n}(:,1:Ap);
+    %end       
+    %beta = beta + mu_like;
+    
 end
 
 

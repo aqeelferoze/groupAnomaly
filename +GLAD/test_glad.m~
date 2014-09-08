@@ -38,8 +38,8 @@ varMaxPre = 50;
 hyper_para_init = init_hyper_para(hyper_para_true);
 [ var_para , hyper_para] = glad(data, hyper_para_init, hyperMaxPre, varMaxPre);
 %%
-disp( hyper_para_true.B);
-disp(hyper_para.B);
+disp( hyper_para_true.beta);
+disp(hyper_para.beta);
 
 %%
 %import Plot.*

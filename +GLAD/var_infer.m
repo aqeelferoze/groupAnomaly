@@ -1,4 +1,4 @@
-function [ var_para ] = var_infer( X, Y,  hyper_para, var_para,varMax,thres )
+function [ var_para ] = var_infer( X, Y, hyper_para, var_para,varMax,  thres )
 %VAR_INFER Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -16,7 +16,7 @@ end
 
 for varIter = 1 : varMax
     if verbose
-        fprintf('----Iter = %d , variational likelihood:  \n',varIter);
+        fprintf('----Iter = %d \n',varIter);
     end 
     fprintf('----update_lambda = \n');
     [var_para.lambda] = update_lambda( hyper_para, var_para);
