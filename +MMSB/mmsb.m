@@ -1,4 +1,4 @@
-function [ hyper_para, var_para] = mmsb(Y, hyper_para)
+function [ hyper_para, var_para] = mmsb(Y, hyper_para, hyperMaxPre, varMaxPre)
 %MMSB Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -13,6 +13,12 @@ M = size(hyper_para.B,1);
 
 hyperMax = 20;
 varMax = 50;
+
+if nargin >2
+    hyperMax = hyperMaxPre;
+    varMax = varMaxPre;
+end
+
 thres = 1e-4;
 
 var_para = new_var_para0(hyper_para, N, M);
