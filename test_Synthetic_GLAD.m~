@@ -8,8 +8,8 @@ global verbose;
 verbose = 1;
 
 % Ms = 6;Me =7; repeat_num=1;
-
-for n = 1:repeat_num
+for M = m 
+    for n = 1:repeat_num
     fprintf('Glad M=%d dataNo=%d/%d\n', M, n, repeat_num);
     fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load(fname);
@@ -19,8 +19,8 @@ for n = 1:repeat_num
     import GLAD.*; 
     import lib.*
     
-    hyperMaxPre = 20;
-    varMaxPre = 50;
+    hyperMaxPre = 10;
+    varMaxPre = 30;
     hyper_para_init = GLAD.init_hyper_para(hyper_para); % hyper_para is the ground truth
     [var_para_glad, hyper_para_glad] = GLAD.glad(data,hyper_para_init,  hyperMaxPre, varMaxPre);
     save(strcat('./NewResult/gladModel',int2str(M),'_',int2str(n),'.mat'),'var_para_glad','hyper_para_glad');
@@ -35,7 +35,7 @@ for n = 1:repeat_num
 %     save(strcat('./NewResult/gladScore',int2str(M),'_',int2str(n),'.mat'),'G_idx_glad','R_idx_glad','scores_glad');
   
     
-end  
+ end  
 
 
 exit;
