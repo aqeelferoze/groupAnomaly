@@ -8,8 +8,8 @@ global verbose;
 verbose = 1;
 
 % Ms = 6;Me =7; repeat_num=1;
-
-for n = 1:repeat_num
+repeat_num = 10;
+for n = 4:repeat_num
     fprintf('Glad M=%d dataNo=%d/%d\n', M, n, repeat_num);
     fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load(fname);
