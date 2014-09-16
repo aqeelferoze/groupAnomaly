@@ -3,10 +3,9 @@ addpath(genpath('~/Documents/MATLAB/groupAnomaly'));
 global verbose;
 verbose = 1;
 
-
-
 repeat_num = 3;
 for n = 1:repeat_num
+    
     fprintf('Graph M=%d dataNo=%d/%d\n', M, n, repeat_num);
     fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load (fname);

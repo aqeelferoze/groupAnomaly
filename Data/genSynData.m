@@ -5,7 +5,7 @@ import GLAD.*;
 % Ms = 2:10;
 Ms = 6;
 pr = 0.1;
-N = 100;
+N = 500;
 repeat_num =1;
 for i = 1:length(Ms)
     for n = 1: repeat_num
