@@ -9,7 +9,7 @@ verbose = 1;
 
 % Ms = 6;Me =7; repeat_num=1;
 repeat_num = 10;
-for n = 4:repeat_num
+for n = 1:repeat_num
     fprintf('Glad M=%d dataNo=%d/%d\n', M, n, repeat_num);
     fname = strcat('./Data/synth/syn',int2str(M),'_',int2str(n),'.mat');
     load(fname);
@@ -22,7 +22,7 @@ for n = 4:repeat_num
     hyperMaxPre = 20;
     varMaxPre = 50;
     hyper_para_init = GLAD.init_hyper_para(hyper_para); % hyper_para is the ground truth
-    [var_para_glad, hyper_para_glad] = GLAD.glad(data,hyper_para_init,  hyperMaxPre, varMaxPre);
+    [var_para_glad, hyper_para_glad] = GLAD.glad(data,hyper_para,  hyperMaxPre, varMaxPre);
     save(strcat('./NewResult/gladModel',int2str(M),'_',int2str(n),'.mat'),'var_para_glad','hyper_para_glad');
     fprintf('*******Done with GLAD, Model Saved ******* \n');
 
